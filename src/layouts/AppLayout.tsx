@@ -34,7 +34,7 @@ export function AppLayout() {
           <div className="flex h-9 w-9 items-center justify-center rounded-xl bg-teal-500 text-white">
             <Sparkles className="h-5 w-5" />
           </div>
-          <span className="font-display text-lg font-semibold">VocaLoop</span>
+          <span className="font-display text-lg font-semibold">LearnVocab</span>
         </div>
 
         <nav className="flex-1 space-y-1 px-3">
