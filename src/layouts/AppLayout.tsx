@@ -1,5 +1,5 @@
 import { NavLink, Outlet, useNavigate } from 'react-router-dom'
-import { Home, BookOpen, RotateCcw, Star, BarChart3, User, Moon, Sun, LogOut, Sparkles } from 'lucide-react'
+import { Home, BookOpen, RotateCcw, Star, BarChart3, User, Moon, Sun, LogOut } from 'lucide-react'
 import { useAuth } from '@/hooks/useAuth'
 import { useTheme } from '@/hooks/useTheme'
 import { authService } from '@/services/authService'
@@ -32,9 +32,9 @@ export function AppLayout() {
       <aside className="fixed inset-y-0 left-0 z-30 hidden w-64 flex-col border-r border-ink/[0.06] bg-white/80 backdrop-blur-xl dark:border-white/[0.06] dark:bg-[#161826]/80 lg:flex">
         <div className="flex items-center gap-2 px-6 py-6">
           <div className="flex h-9 w-9 items-center justify-center rounded-xl bg-teal-500 text-white">
-            <Sparkles className="h-5 w-5" />
+            <span className="font-display text-xl font-bold">K</span>
           </div>
-          <span className="font-display text-lg font-semibold">LearnVocab</span>
+          <span className="font-display text-lg font-semibold">learnvocab</span>
         </div>
 
         <nav className="flex-1 space-y-1 px-3">
@@ -88,9 +88,9 @@ export function AppLayout() {
       <header className="sticky top-0 z-30 flex items-center justify-between border-b border-ink/[0.06] bg-white/80 px-4 py-3 backdrop-blur-xl dark:border-white/[0.06] dark:bg-[#161826]/80 lg:hidden">
         <div className="flex items-center gap-2">
           <div className="flex h-8 w-8 items-center justify-center rounded-lg bg-teal-500 text-white">
-            <Sparkles className="h-4 w-4" />
+            <span className="font-display text-lg font-bold">K</span>
           </div>
-          <span className="font-display text-base font-semibold">VocaLoop</span>
+          <span className="font-display text-base font-semibold">learnvocab</span>
         </div>
         <button
           onClick={toggleTheme}

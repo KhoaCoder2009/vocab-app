@@ -1,40 +1,24 @@
 import { Outlet, Link } from 'react-router-dom'
-import { Sparkles } from 'lucide-react'
 import { motion } from 'framer-motion'
 
 export function AuthLayout() {
   return (
-    <div className="flex min-h-screen bg-paper dark:bg-[#12141F]">
-      <div className="flex w-full flex-col justify-center px-6 py-12 sm:px-12 lg:w-1/2 lg:px-20">
-        <Link to="/" className="mb-10 flex items-center gap-2">
-          <div className="flex h-9 w-9 items-center justify-center rounded-xl bg-teal-500 text-white">
-            <Sparkles className="h-5 w-5" />
+    <div className="min-h-screen bg-[#f8f5f3] px-4 py-10 dark:bg-[#12141F] sm:px-6 sm:py-14">
+      <div className="mx-auto flex min-h-[calc(100vh-5rem)] w-full max-w-md flex-col justify-center sm:min-h-[calc(100vh-7rem)]">
+        <Link to="/" className="mb-8 flex items-center justify-center gap-2.5">
+          <div className="flex h-10 w-10 items-center justify-center rounded-xl bg-teal-500 text-white shadow-[0_8px_20px_-8px_rgba(14,164,122,0.8)]">
+            <span className="font-display text-2xl font-bold">K</span>
           </div>
-          <span className="font-display text-lg font-semibold text-ink dark:text-white">VocaLoop</span>
+          <span className="font-display text-xl font-semibold text-ink dark:text-white">learnvocab</span>
         </Link>
         <motion.div
           initial={{ opacity: 0, y: 12 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.4 }}
-          className="mx-auto w-full max-w-sm"
+          className="w-full rounded-[1.75rem] bg-white p-7 shadow-[0_24px_70px_-30px_rgba(27,31,59,0.28)] dark:bg-white/[0.06] dark:shadow-none sm:p-9"
         >
           <Outlet />
         </motion.div>
-      </div>
-
-      <div className="relative hidden w-1/2 items-center justify-center overflow-hidden bg-ink lg:flex">
-        <div className="absolute inset-0 bg-gradient-to-br from-teal-600 via-ink to-violet-600 opacity-90" />
-        <div className="relative z-10 max-w-md px-10 text-center text-white">
-          <div className="mx-auto mb-8 flex h-24 w-32 -rotate-6 items-center justify-center rounded-2xl border border-white/20 bg-white/10 font-display text-2xl font-semibold shadow-lift backdrop-blur-sm">
-            achieve
-          </div>
-          <h2 className="font-display text-2xl font-semibold leading-snug">
-            Mỗi ngày một chút, từ vựng ở lại mãi mãi.
-          </h2>
-          <p className="mt-3 text-sm text-white/70">
-            Flashcard thông minh, kiểm tra điền từ và ôn tập ngắt quãng giúp bạn ghi nhớ lâu hơn.
-          </p>
-        </div>
       </div>
     </div>
   )

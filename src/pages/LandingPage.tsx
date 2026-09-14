@@ -1,7 +1,6 @@
 import { Link } from 'react-router-dom'
 import { motion } from 'framer-motion'
 import {
-  Sparkles,
   Layers,
   PencilLine,
   RotateCcw,
@@ -76,9 +75,9 @@ export function LandingPage() {
       <header className="mx-auto flex max-w-6xl items-center justify-between px-6 py-6">
         <div className="flex items-center gap-2">
           <div className="flex h-9 w-9 items-center justify-center rounded-xl bg-teal-500 text-white">
-            <Sparkles className="h-5 w-5" />
+            <span className="font-display text-xl font-bold">K</span>
           </div>
-          <span className="font-display text-lg font-semibold text-ink dark:text-white">LearnVocab</span>
+          <span className="font-display text-lg font-semibold text-ink dark:text-white">learnvocab</span>
         </div>
         <div className="flex items-center gap-3">
           <Link to="/login">
@@ -379,7 +378,7 @@ export function LandingPage() {
       </section>
 
       <footer className="border-t border-ink/[0.06] py-8 text-center text-sm text-ink-soft dark:border-white/[0.06] dark:text-white/50">
-        © {new Date().getFullYear()} LearnVocab. Học từ vựng thông minh hơn mỗi ngày.
+        © {new Date().getFullYear()} learnvocab. Học từ vựng thông minh hơn mỗi ngày.
       </footer>
     </div>
   )
