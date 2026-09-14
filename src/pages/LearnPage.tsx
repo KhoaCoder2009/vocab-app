@@ -36,7 +36,7 @@ export function LearnPage() {
     setError(false)
     try {
       const list = await vocabService.listVocabularies(setId)
-      setWords(list)
+      setWords(shuffleArray(list))
       if (list.length > 0) {
         const session = await sessionService.startSession(user.id, setId, 'flashcard')
         setSessionId(session.id)

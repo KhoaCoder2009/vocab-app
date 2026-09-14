@@ -57,7 +57,7 @@ export function PracticePage() {
         setId = session.set_id
       }
       const list = await vocabService.listVocabularies(setId)
-      setWords(list)
+      setWords(shuffleArray(list))
     } catch {
       setError(true)
     } finally {
