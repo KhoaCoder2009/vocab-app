@@ -245,6 +245,12 @@ export function PracticePage() {
               <AnswerInput
                 value={answer}
                 onChange={(e) => setAnswer(e.target.value)}
+                onKeyDown={(e) => {
+                  if (e.key === 'Enter' && checked === 'idle' && answer.trim()) {
+                    e.preventDefault()
+                    void handleCheck()
+                  }
+                }}
                 placeholder="Nhập từ tiếng Anh..."
                 state={checked}
                 disabled={checked !== 'idle'}
