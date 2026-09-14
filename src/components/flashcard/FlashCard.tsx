@@ -1,6 +1,7 @@
 import { motion, AnimatePresence } from 'framer-motion'
 import { Sparkles } from 'lucide-react'
 import { AudioButton } from '@/components/vocab/AudioButton'
+import { formatPartOfSpeech } from '@/lib/utils'
 import type { Vocabulary } from '@/types/database'
 
 interface FlashCardProps {
@@ -10,6 +11,8 @@ interface FlashCardProps {
 }
 
 export function FlashCard({ word, flipped, onFlip }: FlashCardProps) {
+  const formattedPos = formatPartOfSpeech(word.part_of_speech)
+
   return (
     <div className="mx-auto h-[380px] w-full max-w-md [perspective:1600px] sm:h-[420px]">
       <motion.div
@@ -27,9 +30,16 @@ export function FlashCard({ word, flipped, onFlip }: FlashCardProps) {
         {/* FRONT */}
         <div className="absolute inset-0 flex flex-col items-center justify-center rounded-[24px] border border-ink/[0.06] bg-white p-8 text-center shadow-lift [backface-visibility:hidden] dark:border-white/[0.06] dark:bg-[#1A1D2E]">
           <p className="font-display text-4xl font-semibold text-ink dark:text-white sm:text-5xl">{word.word}</p>
-          {word.pronunciation && (
-            <p className="mt-3 text-lg text-ink-soft dark:text-white/50">{word.pronunciation}</p>
-          )}
+          <div className="mt-3 flex flex-wrap items-center justify-center gap-2">
+            {word.pronunciation && (
+              <p className="text-lg text-ink-soft dark:text-white/50">{word.pronunciation}</p>
+            )}
+            {formattedPos && (
+              <span className="rounded-full bg-violet-100 px-2.5 py-0.5 text-xs font-medium text-violet-600 dark:bg-violet-500/15 dark:text-violet-300">
+                {formattedPos}
+              </span>
+            )}
+          </div>
           <div className="mt-6" onClick={(e) => e.stopPropagation()}>
             <AudioButton text={word.word} size="lg" />
           </div>
@@ -43,9 +53,9 @@ export function FlashCard({ word, flipped, onFlip }: FlashCardProps) {
           <Sparkles className="mb-2 h-6 w-6 text-teal-500" />
           <p className="font-display text-2xl font-semibold text-ink dark:text-white sm:text-3xl">{word.word}</p>
           <p className="mt-1 font-display text-xl font-semibold text-teal-600 dark:text-teal-400">{word.meaning}</p>
-          {word.part_of_speech && (
+          {formattedPos && (
             <span className="mt-2 rounded-full bg-violet-100 px-2.5 py-0.5 text-xs font-medium text-violet-600 dark:bg-violet-500/15 dark:text-violet-300">
-              {word.part_of_speech}
+              {formattedPos}
             </span>
           )}
           {word.example && (

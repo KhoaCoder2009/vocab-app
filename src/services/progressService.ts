@@ -30,7 +30,7 @@ export const progressService = {
   async getDueForReview(userId: string): Promise<UserVocabularyProgress[]> {
     const { data, error } = await supabase
       .from('user_vocabulary_progress')
-      .select('*, vocabularies(*)')
+      .select('*, vocabularies(*, vocabulary_sets(id, title, cover_color))')
       .eq('user_id', userId)
       .lte('next_review_at', new Date().toISOString())
       .order('next_review_at', { ascending: true })

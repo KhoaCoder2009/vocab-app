@@ -65,3 +65,34 @@ export function nextReviewDate(masteryLevel: number): Date {
   d.setDate(d.getDate() + days)
   return d
 }
+
+/**
+ * Lấy URL ảnh minh họa cho từ vựng.
+ * Ưu tiên: image_url từ DB → Pixabay API → Unsplash fallback
+ */
+export function getVocabularyImage(word: string, imageUrl?: string | null): string {
+  if (imageUrl) return imageUrl
+  
+  // Fallback: Unsplash Source API (nếu Pixabay không có hoặc chưa load)
+  // Kích thước cố định 400x300 để tối ưu bandwidth
+  const query = encodeURIComponent(word)
+  return `https://source.unsplash.com/400x300/?${query}`
+}
+
+/**
+ * Format loại từ thành dạng viết tắt chuẩn
+ */
+export function formatPartOfSpeech(pos: string | null | undefined): string {
+  if (!pos) return ''
+  const map: Record<string, string> = {
+    noun: 'n.',
+    verb: 'v.',
+    adjective: 'adj.',
+    adverb: 'adv.',
+    pronoun: 'pron.',
+    preposition: 'prep.',
+    conjunction: 'conj.',
+    interjection: 'interj.',
+  }
+  return map[pos.toLowerCase()] || pos
+}

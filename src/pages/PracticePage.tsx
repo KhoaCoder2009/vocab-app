@@ -7,7 +7,7 @@ import { useKeyboardShortcut } from '@/hooks/useKeyboardShortcut'
 import { vocabService } from '@/services/vocabService'
 import { sessionService } from '@/services/sessionService'
 import { progressService } from '@/services/progressService'
-import { isAnswerCorrect, generateHint } from '@/lib/utils'
+import { isAnswerCorrect, generateHint, formatPartOfSpeech } from '@/lib/utils'
 import { Button } from '@/components/ui/Button'
 import { ProgressBar } from '@/components/ui/ProgressBar'
 import { AnswerInput } from '@/components/vocab/AnswerInput'
@@ -73,6 +73,7 @@ export function PracticePage() {
   const currentWord = words[index]
   const sentence = currentWord ? buildBlankSentence(currentWord) : ''
   const isLast = index === words.length - 1
+  const formattedPos = currentWord ? formatPartOfSpeech(currentWord.part_of_speech) : ''
 
   const handleCheck = async () => {
     if (!currentWord || !sessionId || !user || checked !== 'idle') return
@@ -133,10 +134,15 @@ export function PracticePage() {
   useKeyboardShortcut(
     useMemo(
       () => ({
-        Enter: () => (checked === 'idle' ? handleCheck() : handleContinue()),
+        Enter: () => {
+          if (checked === 'idle' && answer.trim()) {
+            handleCheck()
+          } else if (checked !== 'idle') {
+            handleContinue()
+          }
+        },
       }),
-      // eslint-disable-next-line react-hooks/exhaustive-deps
-      [checked, answer, index]
+      [checked, answer, handleCheck, handleContinue]
     ),
     !loading && !error && words.length > 0
   )
@@ -165,12 +171,38 @@ export function PracticePage() {
           animate={{ opacity: 1, y: 0 }}
           exit={{ opacity: 0, y: -12 }}
           transition={{ duration: 0.25 }}
+          className="space-y-4"
         >
+          {/* Gradient header - không có ảnh */}
+          <div className="overflow-hidden rounded-2xl shadow-md">
+            <div className="relative h-48 w-full bg-gradient-to-br from-violet-100 via-violet-50 to-indigo-100 dark:from-violet-500/10 dark:via-violet-500/5 dark:to-indigo-500/10">
+              <div className="absolute inset-0 flex items-center justify-center">
+                <div className="h-32 w-32 rounded-full bg-white/40 blur-3xl dark:bg-white/5" />
+              </div>
+            </div>
+          </div>
+
+          {/* Card nội dung */}
           <div className="rounded-[24px] border border-ink/[0.06] bg-white p-8 shadow-card dark:border-white/[0.06] dark:bg-[#1A1D2E]">
-            <p className="text-center text-sm font-medium uppercase tracking-wide text-ink-soft dark:text-white/50">
-              Nghĩa
-            </p>
-            <p className="mt-1 text-center font-display text-2xl font-semibold text-ink dark:text-white">
+            <div className="flex items-center justify-center gap-2 mb-2">
+              {formattedPos && (
+                <span className="rounded-full bg-violet-100 px-2.5 py-0.5 text-xs font-medium text-violet-600 dark:bg-violet-500/15 dark:text-violet-300">
+                  {formattedPos}
+                </span>
+              )}
+            </div>
+
+            {/* Định nghĩa tiếng Anh */}
+            {currentWord.english_definition && (
+              <div className="mb-4 rounded-xl border border-violet-100 bg-violet-50 px-4 py-3 dark:border-violet-500/20 dark:bg-violet-500/5">
+                <p className="text-center text-sm font-medium italic text-violet-900 dark:text-violet-200">
+                  &ldquo;{currentWord.english_definition}&rdquo;
+                </p>
+              </div>
+            )}
+
+            {/* Nghĩa tiếng Việt */}
+            <p className="text-center font-display text-2xl font-semibold text-ink dark:text-white">
               {currentWord.meaning}
             </p>
 

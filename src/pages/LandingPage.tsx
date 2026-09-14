@@ -78,7 +78,7 @@ export function LandingPage() {
           <div className="flex h-9 w-9 items-center justify-center rounded-xl bg-teal-500 text-white">
             <Sparkles className="h-5 w-5" />
           </div>
-          <span className="font-display text-lg font-semibold text-ink dark:text-white">VocaLoop</span>
+          <span className="font-display text-lg font-semibold text-ink dark:text-white">LearnVocab</span>
         </div>
         <div className="flex items-center gap-3">
           <Link to="/login">
@@ -234,6 +234,129 @@ export function LandingPage() {
         </div>
       </section>
 
+      {/* FOR STUDENTS */}
+      <section className="bg-gradient-to-br from-indigo-50 to-violet-50 py-16 dark:from-indigo-500/5 dark:to-violet-500/5">
+        <div className="mx-auto max-w-6xl px-6">
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            className="text-center"
+          >
+            <h2 className="font-display text-3xl font-semibold text-ink dark:text-white">
+              Dành cho học sinh
+            </h2>
+            <p className="mt-3 text-ink-soft dark:text-white/60">
+              Bộ từ vựng theo chương trình SGK, giúp bạn học hiệu quả hơn
+            </p>
+          </motion.div>
+
+          <div className="mt-12 grid grid-cols-1 gap-6 md:grid-cols-2 lg:grid-cols-3">
+            {/* English 12 Card */}
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.4, delay: 0.1 }}
+              className="group rounded-[20px] border border-ink/[0.06] bg-white p-6 shadow-card transition-all hover:shadow-lift dark:border-white/[0.06] dark:bg-[#1A1D2E]"
+            >
+              <div className="mb-4 flex h-12 w-12 items-center justify-center rounded-xl bg-indigo-100 text-indigo-600 dark:bg-indigo-500/15 dark:text-indigo-400">
+                <span className="font-display text-xl font-bold">12</span>
+              </div>
+              <h3 className="font-display text-xl font-semibold text-ink dark:text-white">
+                Tiếng Anh 12
+              </h3>
+              <p className="mt-2 text-sm text-ink-soft dark:text-white/60">
+                Từ vựng SGK Tiếng Anh 12 theo từng Unit
+              </p>
+              <div className="mt-4 space-y-2 text-sm">
+                <div className="flex items-center gap-2 text-ink-soft dark:text-white/70">
+                  <div className="h-1.5 w-1.5 rounded-full bg-indigo-500" />
+                  <span>Unit 1: Life Stories We Admire</span>
+                </div>
+                <div className="flex items-center gap-2 text-ink-soft/50 dark:text-white/40">
+                  <div className="h-1.5 w-1.5 rounded-full bg-ink/30 dark:bg-white/30" />
+                  <span>Unit 2-10: Coming soon</span>
+                </div>
+              </div>
+              <Link to="/register">
+                <Button variant="secondary" size="sm" className="mt-6 w-full group-hover:bg-indigo-100 dark:group-hover:bg-indigo-500/15">
+                  Học ngay
+                </Button>
+              </Link>
+            </motion.div>
+
+            {/* English 11 Card */}
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.4, delay: 0.15 }}
+              className="group rounded-[20px] border border-ink/[0.06] bg-white p-6 shadow-card opacity-60 dark:border-white/[0.06] dark:bg-[#1A1D2E]"
+            >
+              <div className="mb-4 flex h-12 w-12 items-center justify-center rounded-xl bg-violet-100 text-violet-600 dark:bg-violet-500/15 dark:text-violet-400">
+                <span className="font-display text-xl font-bold">11</span>
+              </div>
+              <h3 className="font-display text-xl font-semibold text-ink dark:text-white">
+                Tiếng Anh 11
+              </h3>
+              <p className="mt-2 text-sm text-ink-soft dark:text-white/60">
+                Từ vựng SGK Tiếng Anh 11 theo từng Unit
+              </p>
+              <div className="mt-4 space-y-2 text-sm">
+                <div className="flex items-center gap-2 text-ink-soft/50 dark:text-white/40">
+                  <div className="h-1.5 w-1.5 rounded-full bg-ink/30 dark:bg-white/30" />
+                  <span>Coming soon...</span>
+                </div>
+              </div>
+              <Button variant="secondary" size="sm" className="mt-6 w-full opacity-50" disabled>
+                Sắp ra mắt
+              </Button>
+            </motion.div>
+
+            {/* English 10 Card */}
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.4, delay: 0.2 }}
+              className="group rounded-[20px] border border-ink/[0.06] bg-white p-6 shadow-card opacity-60 dark:border-white/[0.06] dark:bg-[#1A1D2E]"
+            >
+              <div className="mb-4 flex h-12 w-12 items-center justify-center rounded-xl bg-teal-100 text-teal-600 dark:bg-teal-500/15 dark:text-teal-400">
+                <span className="font-display text-xl font-bold">10</span>
+              </div>
+              <h3 className="font-display text-xl font-semibold text-ink dark:text-white">
+                Tiếng Anh 10
+              </h3>
+              <p className="mt-2 text-sm text-ink-soft dark:text-white/60">
+                Từ vựng SGK Tiếng Anh 10 theo từng Unit
+              </p>
+              <div className="mt-4 space-y-2 text-sm">
+                <div className="flex items-center gap-2 text-ink-soft/50 dark:text-white/40">
+                  <div className="h-1.5 w-1.5 rounded-full bg-ink/30 dark:bg-white/30" />
+                  <span>Coming soon...</span>
+                </div>
+              </div>
+              <Button variant="secondary" size="sm" className="mt-6 w-full opacity-50" disabled>
+                Sắp ra mắt
+              </Button>
+            </motion.div>
+          </div>
+
+          <motion.div
+            initial={{ opacity: 0, y: 10 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ delay: 0.3 }}
+            className="mt-8 text-center"
+          >
+            <p className="text-sm text-ink-soft dark:text-white/60">
+              💡 <strong>Lưu ý:</strong> Bộ từ vựng SGK được cập nhật thường xuyên. Đăng ký để nhận thông báo khi có Unit mới!
+            </p>
+          </motion.div>
+        </div>
+      </section>
+
       {/* CTA */}
       <section className="mx-auto max-w-3xl px-6 py-20 text-center">
         <motion.div
@@ -256,7 +379,7 @@ export function LandingPage() {
       </section>
 
       <footer className="border-t border-ink/[0.06] py-8 text-center text-sm text-ink-soft dark:border-white/[0.06] dark:text-white/50">
-        © {new Date().getFullYear()} VocaLoop. Học từ vựng thông minh hơn mỗi ngày.
+        © {new Date().getFullYear()} LearnVocab. Học từ vựng thông minh hơn mỗi ngày.
       </footer>
     </div>
   )

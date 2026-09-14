@@ -49,7 +49,7 @@ export function SetsPage() {
         </div>
         <Link to="/sets/create">
           <Button>
-            <Plus className="h-4 w-4" /> Tạo bộ mới
+            <Plus className="h-4 w-4" /> Tạo bộ mới-Tạo theo yêu cầu liên hệ admin
           </Button>
         </Link>
       </div>

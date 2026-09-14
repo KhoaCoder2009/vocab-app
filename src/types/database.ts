@@ -30,6 +30,7 @@ export interface Vocabulary {
   set_id: string
   word: string
   meaning: string
+  english_definition: string | null // Định nghĩa tiếng Anh
   example: string | null
   example_translation: string | null
   part_of_speech: string | null
@@ -99,4 +100,12 @@ export interface UserStreak {
 export interface VocabularyWithProgress extends Vocabulary {
   progress?: UserVocabularyProgress | null
   is_favorite?: boolean
+}
+
+export interface VocabularyWithSet extends Vocabulary {
+  vocabulary_sets: {
+    id: string
+    title: string
+    cover_color: string | null
+  }
 }
