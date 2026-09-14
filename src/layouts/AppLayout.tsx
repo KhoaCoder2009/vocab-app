@@ -21,7 +21,7 @@ export function AppLayout() {
 
   const handleSignOut = async () => {
     await authService.signOut()
-    navigate('/')
+    navigate('/login', { replace: true })
   }
 
   const displayName = profile?.full_name || user?.email?.split('@')[0] || 'Bạn'
@@ -79,7 +79,7 @@ export function AppLayout() {
             className="flex w-full items-center gap-3 rounded-xl px-3.5 py-2.5 text-sm font-medium text-rose-500 hover:bg-rose-500/10"
           >
             <LogOut className="h-[18px] w-[18px]" />
-            Đăng xuất
+            Đăng nhập tài khoản khác
           </button>
         </div>
       </aside>
@@ -98,6 +98,14 @@ export function AppLayout() {
           className="flex h-9 w-9 items-center justify-center rounded-full text-ink-soft hover:bg-ink/5 dark:text-white/70"
         >
           {theme === 'dark' ? <Sun className="h-5 w-5" /> : <Moon className="h-5 w-5" />}
+        </button>
+        <button
+          onClick={handleSignOut}
+          aria-label="Đăng nhập tài khoản khác"
+          title="Đăng nhập tài khoản khác"
+          className="flex h-9 w-9 items-center justify-center rounded-full text-rose-500 hover:bg-rose-500/10"
+        >
+          <LogOut className="h-5 w-5" />
         </button>
       </header>
 
