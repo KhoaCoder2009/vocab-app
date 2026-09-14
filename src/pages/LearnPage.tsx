@@ -1,7 +1,7 @@
 import { useCallback, useEffect, useMemo, useState } from 'react'
 import { useNavigate, useParams } from 'react-router-dom'
 import { motion } from 'framer-motion'
-import { ThumbsDown, ThumbsUp, ArrowRight } from 'lucide-react'
+import { ThumbsDown, ThumbsUp, ArrowRight, Shuffle } from 'lucide-react'
 import { useAuth } from '@/hooks/useAuth'
 import { useKeyboardShortcut } from '@/hooks/useKeyboardShortcut'
 import { vocabService } from '@/services/vocabService'
@@ -13,6 +13,7 @@ import { PageLoading } from '@/components/ui/Spinner'
 import { ErrorState } from '@/components/ui/ErrorState'
 import { EmptyState } from '@/components/ui/EmptyState'
 import { useToast } from '@/hooks/useToast'
+import { shuffleArray } from '@/lib/utils'
 import type { Vocabulary } from '@/types/database'
 
 export function LearnPage() {
@@ -53,6 +54,12 @@ export function LearnPage() {
 
   const currentWord = words[index]
   const isLast = index === words.length - 1
+
+  const handleShuffle = () => {
+    setWords((currentWords) => shuffleArray(currentWords))
+    setIndex(0)
+    setFlipped(false)
+  }
 
   const goNext = useCallback(
     async (_known: boolean) => {
@@ -104,7 +111,19 @@ export function LearnPage() {
           <span>
             {index + 1} / {words.length}
           </span>
-          <span>Flashcard</span>
+          <div className="flex items-center gap-2">
+            <span>Flashcard</span>
+            <Button
+              variant="ghost"
+              size="icon"
+              onClick={handleShuffle}
+              aria-label="Tráo ngẫu nhiên thứ tự từ"
+              title="Tráo ngẫu nhiên thứ tự từ"
+              className="h-8 w-8 rounded-lg"
+            >
+              <Shuffle className="h-4 w-4" />
+            </Button>
+          </div>
         </div>
         <ProgressBar value={index + 1} max={words.length} />
       </div>

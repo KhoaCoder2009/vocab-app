@@ -1,13 +1,13 @@
 import { useCallback, useEffect, useMemo, useState } from 'react'
 import { useNavigate, useParams, useLocation } from 'react-router-dom'
 import { motion, AnimatePresence } from 'framer-motion'
-import { Lightbulb, CheckCircle2, XCircle, ArrowRight } from 'lucide-react'
+import { Lightbulb, CheckCircle2, XCircle, ArrowRight, Shuffle } from 'lucide-react'
 import { useAuth } from '@/hooks/useAuth'
 import { useKeyboardShortcut } from '@/hooks/useKeyboardShortcut'
 import { vocabService } from '@/services/vocabService'
 import { sessionService } from '@/services/sessionService'
 import { progressService } from '@/services/progressService'
-import { isAnswerCorrect, generateHint, formatPartOfSpeech } from '@/lib/utils'
+import { isAnswerCorrect, generateHint, formatPartOfSpeech, shuffleArray } from '@/lib/utils'
 import { Button } from '@/components/ui/Button'
 import { ProgressBar } from '@/components/ui/ProgressBar'
 import { AnswerInput } from '@/components/vocab/AnswerInput'
@@ -74,6 +74,16 @@ export function PracticePage() {
   const sentence = currentWord ? buildBlankSentence(currentWord) : ''
   const isLast = index === words.length - 1
   const formattedPos = currentWord ? formatPartOfSpeech(currentWord.part_of_speech) : ''
+
+  const handleShuffle = () => {
+    if (results.length > 0) return
+    setWords((currentWords) => shuffleArray(currentWords))
+    setIndex(0)
+    setAnswer('')
+    setChecked('idle')
+    setUsedHint(false)
+    setHint(null)
+  }
 
   const handleCheck = async () => {
     if (!currentWord || !sessionId || !user || checked !== 'idle') return
@@ -159,7 +169,20 @@ export function PracticePage() {
           <span>
             {index + 1} / {words.length}
           </span>
-          <span>Điền từ · {score} điểm</span>
+          <div className="flex items-center gap-2">
+            <span>Điền từ · {score} điểm</span>
+            <Button
+              variant="ghost"
+              size="icon"
+              onClick={handleShuffle}
+              disabled={results.length > 0}
+              aria-label="Tráo ngẫu nhiên thứ tự từ"
+              title={results.length > 0 ? 'Không thể tráo sau khi đã bắt đầu làm bài' : 'Tráo ngẫu nhiên thứ tự từ'}
+              className="h-8 w-8 rounded-lg"
+            >
+              <Shuffle className="h-4 w-4" />
+            </Button>
+          </div>
         </div>
         <ProgressBar value={index + 1} max={words.length} colorClassName="bg-violet-500" />
       </div>
