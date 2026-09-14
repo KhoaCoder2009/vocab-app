@@ -1,9 +1,10 @@
 import { useEffect, useState } from 'react'
-import { Link, useNavigate, useParams } from 'react-router-dom'
-import { ArrowLeft, Play } from 'lucide-react'
+import { useNavigate, useParams } from 'react-router-dom'
+import { ArrowLeft, ClipboardCheck, Play } from 'lucide-react'
 import { useAuth } from '@/hooks/useAuth'
 import { vocabService } from '@/services/vocabService'
 import { progressService } from '@/services/progressService'
+import { sessionService } from '@/services/sessionService'
 import { Button } from '@/components/ui/Button'
 import { Card } from '@/components/ui/Card'
 import { ProgressBar } from '@/components/ui/ProgressBar'
@@ -22,6 +23,7 @@ export function SetDetailPage() {
   const [words, setWords] = useState<Vocabulary[]>([])
   const [learnedCount, setLearnedCount] = useState(0)
   const [loading, setLoading] = useState(true)
+  const [startingPractice, setStartingPractice] = useState(false)
   const [error, setError] = useState(false)
   const [notFound, setNotFound] = useState(false)
 
@@ -69,6 +71,19 @@ export function SetDetailPage() {
     )
   if (error || !set) return <ErrorState onRetry={load} />
 
+  const handlePractice = async () => {
+    if (!user || words.length === 0 || startingPractice) return
+    setStartingPractice(true)
+    try {
+      const session = await sessionService.startSession(user.id, set.id, 'practice')
+      navigate(`/practice/${session.id}`, { state: { setId: set.id } })
+    } catch {
+      setError(true)
+    } finally {
+      setStartingPractice(false)
+    }
+  }
+
   return (
     <div>
       <button
@@ -89,11 +104,14 @@ export function SetDetailPage() {
             </h1>
             <p className="mt-2 max-w-xl text-ink-soft dark:text-white/60">{set.description}</p>
           </div>
-          <Link to={`/learn/${set.id}`} className="shrink-0">
-            <Button size="lg" disabled={words.length === 0}>
+          <div className="flex shrink-0 flex-col gap-2 sm:flex-row">
+            <Button size="lg" variant="secondary" disabled={words.length === 0} onClick={() => navigate(`/learn/${set.id}`)}>
               <Play className="h-4 w-4" /> Bắt đầu học
             </Button>
-          </Link>
+            <Button size="lg" disabled={words.length === 0 || startingPractice} onClick={handlePractice}>
+              <ClipboardCheck className="h-4 w-4" /> Làm bài
+            </Button>
+          </div>
         </div>
 
         <div className="mt-6">
