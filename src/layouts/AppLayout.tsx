@@ -1,8 +1,7 @@
-import { NavLink, Outlet, useNavigate } from 'react-router-dom'
-import { Home, BookOpen, RotateCcw, Star, BarChart3, User, Moon, Sun, LogOut } from 'lucide-react'
+import { NavLink, Outlet } from 'react-router-dom'
+import { Home, BookOpen, RotateCcw, Star, BarChart3, User, Moon, Sun } from 'lucide-react'
 import { useAuth } from '@/hooks/useAuth'
 import { useTheme } from '@/hooks/useTheme'
-import { authService } from '@/services/authService'
 import { cn } from '@/lib/utils'
 
 const navItems = [
@@ -17,13 +16,6 @@ const navItems = [
 export function AppLayout() {
   const { profile, user } = useAuth()
   const { theme, toggleTheme } = useTheme()
-  const navigate = useNavigate()
-
-  const handleSignOut = async () => {
-    await authService.signOut()
-    navigate('/login', { replace: true })
-  }
-
   const displayName = profile?.full_name || user?.email?.split('@')[0] || 'Bạn'
 
   return (
@@ -67,20 +59,6 @@ export function AppLayout() {
               <p className="truncate text-xs text-ink-soft dark:text-white/50">{user?.email}</p>
             </div>
           </div>
-          <button
-            onClick={toggleTheme}
-            className="flex w-full items-center gap-3 rounded-xl px-3.5 py-2.5 text-sm font-medium text-ink-soft hover:bg-slate-100 dark:text-slate-300 dark:hover:bg-slate-800"
-          >
-            {theme === 'dark' ? <Sun className="h-[18px] w-[18px]" /> : <Moon className="h-[18px] w-[18px]" />}
-            {theme === 'dark' ? 'Chế độ sáng' : 'Chế độ tối'}
-          </button>
-          <button
-            onClick={handleSignOut}
-            className="flex w-full items-center gap-3 rounded-xl px-3.5 py-2.5 text-sm font-medium text-rose-500 hover:bg-rose-500/10"
-          >
-            <LogOut className="h-[18px] w-[18px]" />
-            Đăng nhập tài khoản khác
-          </button>
         </div>
       </aside>
 
@@ -95,21 +73,24 @@ export function AppLayout() {
         <button
           onClick={toggleTheme}
           aria-label="Chuyển giao diện sáng/tối"
-          className="flex h-9 w-9 items-center justify-center rounded-full text-ink-soft hover:bg-ink/5 dark:text-white/70"
+          title={theme === 'dark' ? 'Chuyển sang giao diện sáng' : 'Chuyển sang giao diện tối'}
+          className="flex h-9 w-9 items-center justify-center rounded-full text-ink-soft hover:bg-ink/5 dark:text-white/70 dark:hover:bg-white/10"
         >
           {theme === 'dark' ? <Sun className="h-5 w-5" /> : <Moon className="h-5 w-5" />}
-        </button>
-        <button
-          onClick={handleSignOut}
-          aria-label="Đăng nhập tài khoản khác"
-          title="Đăng nhập tài khoản khác"
-          className="flex h-9 w-9 items-center justify-center rounded-full text-rose-500 hover:bg-rose-500/10"
-        >
-          <LogOut className="h-5 w-5" />
         </button>
       </header>
 
       <main className="min-h-screen pb-24 lg:ml-64 lg:pb-8">
+        <div className="hidden justify-end px-4 pt-4 lg:flex lg:px-8">
+          <button
+            onClick={toggleTheme}
+            aria-label="Chuyển giao diện sáng/tối"
+            title={theme === 'dark' ? 'Chuyển sang giao diện sáng' : 'Chuyển sang giao diện tối'}
+            className="flex h-10 w-10 items-center justify-center rounded-full text-ink-soft hover:bg-slate-200 dark:text-slate-300 dark:hover:bg-slate-800"
+          >
+            {theme === 'dark' ? <Sun className="h-5 w-5" /> : <Moon className="h-5 w-5" />}
+          </button>
+        </div>
         <div className="mx-auto max-w-6xl px-4 py-6 sm:px-6 lg:px-8">
           <Outlet />
         </div>

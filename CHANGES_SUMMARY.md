@@ -2,7 +2,7 @@
 
 ## ✅ Completed Tasks
 
-### 1. ❌ Bỏ tích hợp API ảnh (Pixabay/Pexels)
+### 1. ❌ Bỏ tích hợp API ảnh bên ngoài
 - **Deleted**: `src/hooks/useVocabularyImage.ts`
 - **Deleted**: `src/services/imageService.ts`
 - **Updated**: `PracticePage.tsx` - Thay ảnh từ API bằng gradient đơn giản

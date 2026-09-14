@@ -1,5 +1,6 @@
 import { useEffect, useState, type FormEvent } from 'react'
-import { Mail, Calendar, Flame, BookMarked, Target } from 'lucide-react'
+import { Mail, Calendar, Flame, BookMarked, Target, LogOut } from 'lucide-react'
+import { useNavigate } from 'react-router-dom'
 import { useAuth } from '@/hooks/useAuth'
 import { supabase } from '@/lib/supabase'
 import { statsService, streakService } from '@/services/statsService'
@@ -11,10 +12,12 @@ import { Button } from '@/components/ui/Button'
 import { PageLoading } from '@/components/ui/Spinner'
 import { ErrorState } from '@/components/ui/ErrorState'
 import { useToast } from '@/hooks/useToast'
+import { authService } from '@/services/authService'
 
 export function ProfilePage() {
   const { user, profile, refreshProfile } = useAuth()
   const { showToast } = useToast()
+  const navigate = useNavigate()
   const [fullName, setFullName] = useState('')
   const [saving, setSaving] = useState(false)
   const [loading, setLoading] = useState(true)
@@ -77,6 +80,11 @@ export function ProfilePage() {
     }
   }
 
+  const handleSignOut = async () => {
+    await authService.signOut()
+    navigate('/login', { replace: true })
+  }
+
   if (loading) return <PageLoading label="Đang tải hồ sơ..." />
   if (error || !stats) return <ErrorState onRetry={load} />
 
@@ -110,6 +118,12 @@ export function ProfilePage() {
             Lưu thay đổi
           </Button>
         </form>
+
+        <div className="mt-6 border-t border-border pt-5 dark:border-slate-700">
+          <Button type="button" variant="outline" onClick={handleSignOut} className="w-full sm:w-auto">
+            <LogOut className="h-4 w-4" /> Đăng nhập tài khoản khác
+          </Button>
+        </div>
       </Card>
 
       <div className="mt-6 grid grid-cols-2 gap-4 sm:grid-cols-4">

@@ -76,13 +76,11 @@ export function nextReviewDate(masteryLevel: number): Date {
 }
 
 /**
- * Lấy URL ảnh minh họa cho từ vựng.
- * Ưu tiên: image_url từ DB → Pixabay API → Unsplash fallback
+ * Lấy URL ảnh minh họa cho từ vựng từ dữ liệu đã lưu.
  */
 export function getVocabularyImage(word: string, imageUrl?: string | null): string {
   if (imageUrl) return imageUrl
-  
-  // Fallback: Unsplash Source API (nếu Pixabay không có hoặc chưa load)
+
   // Kích thước cố định 400x300 để tối ưu bandwidth
   const query = encodeURIComponent(word)
   return `https://source.unsplash.com/400x300/?${query}`
