@@ -175,18 +175,18 @@ export function PracticePage() {
         >
           {/* Gradient header - không có ảnh */}
           <div className="overflow-hidden rounded-2xl shadow-md">
-            <div className="relative h-48 w-full bg-gradient-to-br from-violet-100 via-violet-50 to-indigo-100 dark:from-violet-500/10 dark:via-violet-500/5 dark:to-indigo-500/10">
+            <div className="relative h-48 w-full bg-violet-50 dark:bg-violet-500/10">
               <div className="absolute inset-0 flex items-center justify-center">
-                <div className="h-32 w-32 rounded-full bg-white/40 blur-3xl dark:bg-white/5" />
+                <div className="h-32 w-32 rounded-full bg-white/60 blur-3xl dark:bg-slate-700/40" />
               </div>
             </div>
           </div>
 
           {/* Card nội dung */}
-          <div className="rounded-[24px] border border-ink/[0.06] bg-white p-8 shadow-card dark:border-white/[0.06] dark:bg-[#1A1D2E]">
+          <div className="rounded-[24px] border border-border bg-white p-8 shadow-card dark:border-slate-700 dark:bg-slate-800">
             <div className="flex items-center justify-center gap-2 mb-2">
               {formattedPos && (
-                <span className="rounded-full bg-violet-100 px-2.5 py-0.5 text-xs font-medium text-violet-600 dark:bg-violet-500/15 dark:text-violet-300">
+                <span className="rounded-full bg-violet-100 px-3 py-1 text-sm font-semibold text-violet-600 dark:bg-violet-500/15 dark:text-violet-300">
                   {formattedPos}
                 </span>
               )}

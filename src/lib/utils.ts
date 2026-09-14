@@ -80,19 +80,35 @@ export function getVocabularyImage(word: string, imageUrl?: string | null): stri
 }
 
 /**
- * Format loại từ thành dạng viết tắt chuẩn
+ * Format loại từ thành tên đầy đủ để hiển thị trong giao diện.
  */
 export function formatPartOfSpeech(pos: string | null | undefined): string {
   if (!pos) return ''
   const map: Record<string, string> = {
-    noun: 'n.',
-    verb: 'v.',
-    adjective: 'adj.',
-    adverb: 'adv.',
-    pronoun: 'pron.',
-    preposition: 'prep.',
-    conjunction: 'conj.',
-    interjection: 'interj.',
+    noun: 'Danh từ',
+    n: 'Danh từ',
+    'n.': 'Danh từ',
+    verb: 'Động từ',
+    v: 'Động từ',
+    'v.': 'Động từ',
+    adjective: 'Tính từ',
+    adj: 'Tính từ',
+    'adj.': 'Tính từ',
+    adverb: 'Trạng từ',
+    adv: 'Trạng từ',
+    'adv.': 'Trạng từ',
+    pronoun: 'Đại từ',
+    pron: 'Đại từ',
+    'pron.': 'Đại từ',
+    preposition: 'Giới từ',
+    prep: 'Giới từ',
+    'prep.': 'Giới từ',
+    conjunction: 'Liên từ',
+    conj: 'Liên từ',
+    'conj.': 'Liên từ',
+    interjection: 'Thán từ',
+    interj: 'Thán từ',
+    'interj.': 'Thán từ',
   }
   return map[pos.toLowerCase()] || pos
 }

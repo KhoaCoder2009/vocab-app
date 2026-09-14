@@ -70,7 +70,7 @@ const steps = [
 
 export function LandingPage() {
   return (
-    <div className="overflow-x-hidden bg-paper dark:bg-[#12141F]">
+    <div className="overflow-x-hidden bg-paper dark:bg-slate-900">
       {/* NAVBAR */}
       <header className="mx-auto flex max-w-6xl items-center justify-between px-6 py-6">
         <div className="flex items-center gap-2">
@@ -81,7 +81,7 @@ export function LandingPage() {
         </div>
         <div className="flex items-center">
           <Link to="/login">
-            <Button variant="primary" size="sm" className="border-2 border-teal-300/40 px-5 shadow-[0_8px_20px_-6px_rgba(14,164,122,0.65)]">
+            <Button variant="primary" size="sm" className="border-2 border-teal-300/40 px-5 shadow-[0_8px_20px_-6px_rgba(37,99,235,0.45)]">
               Đăng nhập
             </Button>
           </Link>
@@ -143,7 +143,7 @@ export function LandingPage() {
           <div className="absolute inset-0 translate-x-6 translate-y-10 rotate-6 rounded-[24px] bg-violet-100 shadow-card dark:bg-violet-500/10" />
           <div className="absolute inset-0 -translate-x-4 translate-y-5 -rotate-3 rounded-[24px] bg-coral-100 shadow-card dark:bg-coral-500/10" />
           <motion.div
-            className="absolute inset-0 rounded-[24px] bg-white p-8 shadow-lift dark:bg-[#1A1D2E] [transform-style:preserve-3d]"
+            className="absolute inset-0 rounded-[24px] bg-white p-8 shadow-lift dark:bg-slate-800 [transform-style:preserve-3d]"
             animate={{ rotateY: [0, 0, 180, 180, 0] }}
             transition={{ duration: 6, repeat: Infinity, times: [0, 0.4, 0.5, 0.9, 1], ease: 'easeInOut' }}
           >
@@ -183,7 +183,7 @@ export function LandingPage() {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true, margin: '-40px' }}
               transition={{ duration: 0.4, delay: i * 0.05 }}
-              className="rounded-[20px] border border-ink/[0.06] bg-white p-6 shadow-card dark:border-white/[0.06] dark:bg-[#1A1D2E]"
+              className="rounded-[20px] border border-border bg-white p-6 shadow-card dark:border-slate-700 dark:bg-slate-800"
             >
               <div className={`mb-4 flex h-11 w-11 items-center justify-center rounded-xl ${colorMap[f.color]}`}>
                 <f.icon className="h-5 w-5" />
@@ -229,7 +229,7 @@ export function LandingPage() {
       </section>
 
       {/* FOR STUDENTS */}
-      <section className="bg-gradient-to-br from-indigo-50 to-violet-50 py-16 dark:from-indigo-500/5 dark:to-violet-500/5">
+      <section className="bg-slate-50 py-16 dark:bg-slate-900">
         <div className="mx-auto max-w-6xl px-6">
           <motion.div
             initial={{ opacity: 0, y: 20 }}
@@ -252,9 +252,9 @@ export function LandingPage() {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ duration: 0.4, delay: 0.1 }}
-              className="group rounded-[20px] border border-ink/[0.06] bg-white p-6 shadow-card transition-all hover:shadow-lift dark:border-white/[0.06] dark:bg-[#1A1D2E]"
+              className="group rounded-[20px] border border-border bg-white p-6 shadow-card transition-all hover:shadow-lift dark:border-slate-700 dark:bg-slate-800"
             >
-              <div className="mb-4 flex h-12 w-12 items-center justify-center rounded-xl bg-indigo-100 text-indigo-600 dark:bg-indigo-500/15 dark:text-indigo-400">
+              <div className="mb-4 flex h-12 w-12 items-center justify-center rounded-xl bg-teal-100 text-teal-600 dark:bg-teal-500/15 dark:text-teal-400">
                 <span className="font-display text-xl font-bold">12</span>
               </div>
               <h3 className="font-display text-xl font-semibold text-ink dark:text-white">
@@ -265,7 +265,7 @@ export function LandingPage() {
               </p>
               <div className="mt-4 space-y-2 text-sm">
                 <div className="flex items-center gap-2 text-ink-soft dark:text-white/70">
-                  <div className="h-1.5 w-1.5 rounded-full bg-indigo-500" />
+                  <div className="h-1.5 w-1.5 rounded-full bg-teal-500" />
                   <span>Unit 1: Life Stories We Admire</span>
                 </div>
                 <div className="flex items-center gap-2 text-ink-soft/50 dark:text-white/40">
@@ -274,7 +274,7 @@ export function LandingPage() {
                 </div>
               </div>
               <Link to="/register">
-                <Button variant="secondary" size="sm" className="mt-6 w-full group-hover:bg-indigo-100 dark:group-hover:bg-indigo-500/15">
+                <Button variant="secondary" size="sm" className="mt-6 w-full group-hover:bg-teal-100 dark:group-hover:bg-teal-500/15">
                   Học ngay
                 </Button>
               </Link>
@@ -286,7 +286,7 @@ export function LandingPage() {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ duration: 0.4, delay: 0.15 }}
-              className="group rounded-[20px] border border-ink/[0.06] bg-white p-6 shadow-card opacity-60 dark:border-white/[0.06] dark:bg-[#1A1D2E]"
+              className="group rounded-[20px] border border-border bg-white p-6 shadow-card opacity-60 dark:border-slate-700 dark:bg-slate-800"
             >
               <div className="mb-4 flex h-12 w-12 items-center justify-center rounded-xl bg-violet-100 text-violet-600 dark:bg-violet-500/15 dark:text-violet-400">
                 <span className="font-display text-xl font-bold">11</span>
@@ -314,7 +314,7 @@ export function LandingPage() {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ duration: 0.4, delay: 0.2 }}
-              className="group rounded-[20px] border border-ink/[0.06] bg-white p-6 shadow-card opacity-60 dark:border-white/[0.06] dark:bg-[#1A1D2E]"
+              className="group rounded-[20px] border border-border bg-white p-6 shadow-card opacity-60 dark:border-slate-700 dark:bg-slate-800"
             >
               <div className="mb-4 flex h-12 w-12 items-center justify-center rounded-xl bg-teal-100 text-teal-600 dark:bg-teal-500/15 dark:text-teal-400">
                 <span className="font-display text-xl font-bold">10</span>

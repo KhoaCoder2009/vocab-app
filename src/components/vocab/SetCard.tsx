@@ -38,7 +38,7 @@ export function SetCard({ set, index = 0 }: SetCardProps) {
       transition={{ delay: index * 0.04, duration: 0.35 }}
     >
       <Link to={`/sets/${set.id}`} className="group block h-full">
-        <div className="flex h-full flex-col rounded-[20px] border border-ink/[0.06] bg-white shadow-card transition-all duration-200 hover:-translate-y-1 hover:shadow-lift dark:border-white/[0.06] dark:bg-[#1A1D2E]">
+        <div className="flex h-full flex-col rounded-[20px] border border-border bg-white shadow-card transition-all duration-200 hover:-translate-y-1 hover:shadow-lift dark:border-slate-700 dark:bg-slate-800">
           <div className={`flex h-24 items-center justify-between rounded-t-[20px] bg-gradient-to-br px-5 ${coverGradient[set.cover_color || 'teal']}`}>
             <BookOpen className="h-7 w-7 text-ink/70 dark:text-white/70" />
             <span className={`rounded-full px-2.5 py-1 text-xs font-medium ${difficultyColor[set.difficulty]}`}>

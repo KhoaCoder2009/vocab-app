@@ -28,14 +28,14 @@ export function FlashCard({ word, flipped, onFlip }: FlashCardProps) {
         }}
       >
         {/* FRONT */}
-        <div className="absolute inset-0 flex flex-col items-center justify-center rounded-[24px] border border-ink/[0.06] bg-white p-8 text-center shadow-lift [backface-visibility:hidden] dark:border-white/[0.06] dark:bg-[#1A1D2E]">
-          <p className="font-display text-4xl font-semibold text-ink dark:text-white sm:text-5xl">{word.word}</p>
+        <div className="absolute inset-0 flex flex-col items-center justify-center rounded-[24px] border border-ink/[0.12] bg-white p-8 text-center text-ink shadow-lift [backface-visibility:hidden]">
+          <p className="font-display text-4xl font-semibold sm:text-5xl">{word.word}</p>
           <div className="mt-3 flex flex-wrap items-center justify-center gap-2">
             {word.pronunciation && (
-              <p className="text-lg text-ink-soft dark:text-white/50">{word.pronunciation}</p>
+              <p className="text-lg text-ink-soft">{word.pronunciation}</p>
             )}
             {formattedPos && (
-              <span className="rounded-full bg-violet-100 px-2.5 py-0.5 text-xs font-medium text-violet-600 dark:bg-violet-500/15 dark:text-violet-300">
+              <span className="rounded-full bg-violet-100 px-3 py-1 text-sm font-semibold text-violet-600 dark:bg-violet-500/15 dark:text-violet-300">
                 {formattedPos}
               </span>
             )}
@@ -43,26 +43,26 @@ export function FlashCard({ word, flipped, onFlip }: FlashCardProps) {
           <div className="mt-6" onClick={(e) => e.stopPropagation()}>
             <AudioButton text={word.word} size="lg" />
           </div>
-          <span className="mt-10 inline-flex items-center gap-1.5 rounded-full bg-ink/5 px-4 py-2 text-sm font-medium text-ink-soft dark:bg-white/10 dark:text-white/60">
+          <span className="mt-10 inline-flex items-center gap-1.5 rounded-full bg-ink/5 px-4 py-2 text-sm font-medium text-ink-soft">
             Nhấn để hiện nghĩa
           </span>
         </div>
 
         {/* BACK */}
-        <div className="absolute inset-0 flex flex-col items-center justify-center overflow-y-auto rounded-[24px] border border-teal-500/20 bg-teal-50 p-8 text-center shadow-lift [backface-visibility:hidden] [transform:rotateY(180deg)] dark:border-teal-500/20 dark:bg-teal-500/[0.07]">
+        <div className="absolute inset-0 flex flex-col items-center justify-center overflow-y-auto rounded-[24px] border border-ink/[0.12] bg-white p-8 text-center text-ink shadow-lift [backface-visibility:hidden] [transform:rotateY(180deg)]">
           <Sparkles className="mb-2 h-6 w-6 text-teal-500" />
-          <p className="font-display text-2xl font-semibold text-ink dark:text-white sm:text-3xl">{word.word}</p>
-          <p className="mt-1 font-display text-xl font-semibold text-teal-600 dark:text-teal-400">{word.meaning}</p>
+          <p className="font-display text-2xl font-semibold sm:text-3xl">{word.word}</p>
+          <p className="mt-1 font-display text-xl font-semibold text-teal-600">{word.meaning}</p>
           {formattedPos && (
-            <span className="mt-2 rounded-full bg-violet-100 px-2.5 py-0.5 text-xs font-medium text-violet-600 dark:bg-violet-500/15 dark:text-violet-300">
+            <span className="mt-2 rounded-full bg-violet-100 px-3 py-1 text-sm font-semibold text-violet-600 dark:bg-violet-500/15 dark:text-violet-300">
               {formattedPos}
             </span>
           )}
           {word.example && (
             <div className="mt-5 space-y-1.5 border-t border-teal-500/15 pt-4">
-              <p className="text-sm italic text-ink dark:text-white/80">&ldquo;{word.example}&rdquo;</p>
+              <p className="text-sm italic text-ink">&ldquo;{word.example}&rdquo;</p>
               {word.example_translation && (
-                <p className="text-sm italic text-ink-soft dark:text-white/50">&ldquo;{word.example_translation}&rdquo;</p>
+                <p className="text-sm italic text-ink-soft">&ldquo;{word.example_translation}&rdquo;</p>
               )}
             </div>
           )}

@@ -145,10 +145,10 @@ export function LearnPage() {
       </motion.div>
 
       <p className="mt-6 text-center text-xs text-ink-soft/70 dark:text-white/40">
-        Phím tắt: <kbd className="rounded bg-ink/5 px-1.5 py-0.5 dark:bg-white/10">Space</kbd> hiện nghĩa ·{' '}
-        <kbd className="rounded bg-ink/5 px-1.5 py-0.5 dark:bg-white/10">→</kbd> từ tiếp theo ·{' '}
-        <kbd className="rounded bg-ink/5 px-1.5 py-0.5 dark:bg-white/10">1</kbd> chưa nhớ ·{' '}
-        <kbd className="rounded bg-ink/5 px-1.5 py-0.5 dark:bg-white/10">2</kbd> đã nhớ
+        Phím tắt: <kbd className="rounded bg-slate-100 px-1.5 py-0.5 dark:bg-slate-800">Space</kbd> hiện nghĩa ·{' '}
+        <kbd className="rounded bg-slate-100 px-1.5 py-0.5 dark:bg-slate-800">→</kbd> từ tiếp theo ·{' '}
+        <kbd className="rounded bg-slate-100 px-1.5 py-0.5 dark:bg-slate-800">1</kbd> chưa nhớ ·{' '}
+        <kbd className="rounded bg-slate-100 px-1.5 py-0.5 dark:bg-slate-800">2</kbd> đã nhớ
       </p>
     </div>
   )

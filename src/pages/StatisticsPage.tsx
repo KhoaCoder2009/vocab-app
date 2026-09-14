@@ -129,8 +129,8 @@ export function StatisticsPage() {
               <CartesianGrid strokeDasharray="3 3" stroke="currentColor" className="text-ink/5 dark:text-white/5" />
               <XAxis dataKey="day" fontSize={11} tickLine={false} axisLine={false} interval={range > 7 ? 4 : 0} />
               <YAxis fontSize={12} tickLine={false} axisLine={false} allowDecimals={false} />
-              <Tooltip contentStyle={{ borderRadius: 12, border: 'none', boxShadow: '0 10px 30px -10px rgba(27,31,59,0.25)' }} />
-              <Bar dataKey="words" fill="#0EA47A" radius={[6, 6, 0, 0]} />
+              <Tooltip contentStyle={{ borderRadius: 12, border: '1px solid var(--color-border)', boxShadow: 'var(--shadow-soft)' }} />
+              <Bar dataKey="words" fill="var(--color-primary)" radius={[6, 6, 0, 0]} />
             </BarChart>
           </ResponsiveContainer>
         </div>

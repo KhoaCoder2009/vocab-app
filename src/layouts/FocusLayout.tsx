@@ -8,7 +8,7 @@ import { X } from 'lucide-react'
 export function FocusLayout() {
   const navigate = useNavigate()
   return (
-    <div className="min-h-screen bg-paper dark:bg-[#12141F]">
+    <div className="min-h-screen bg-paper dark:bg-slate-900">
       <header className="flex items-center justify-between px-4 py-4 sm:px-8">
         <button
           onClick={() => navigate('/dashboard')}

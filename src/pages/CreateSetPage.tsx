@@ -115,7 +115,7 @@ export function CreateSetPage() {
               value={description}
               onChange={(e) => setDescription(e.target.value)}
               rows={3}
-              className="w-full rounded-xl border border-ink/10 bg-white px-4 py-3 text-base text-ink outline-none transition-colors focus:border-teal-500 dark:bg-white/5 dark:text-white dark:border-white/10"
+              className="w-full rounded-xl border border-border bg-white px-4 py-3 text-base text-ink outline-none transition-colors focus:border-teal-500 dark:border-slate-700 dark:bg-slate-800 dark:text-white"
               placeholder="Mô tả ngắn gọn về bộ từ vựng này..."
             />
           </div>

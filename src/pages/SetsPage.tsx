@@ -1,12 +1,10 @@
 import { useEffect, useState } from 'react'
-import { Link } from 'react-router-dom'
-import { Search, Plus, BookX } from 'lucide-react'
+import { Search, BookX } from 'lucide-react'
 import { useAuth } from '@/hooks/useAuth'
 import { useDebounce } from '@/hooks/useDebounce'
 import { vocabService } from '@/services/vocabService'
 import { SetCard } from '@/components/vocab/SetCard'
 import { Input } from '@/components/ui/Input'
-import { Button } from '@/components/ui/Button'
 import { PageLoading } from '@/components/ui/Spinner'
 import { ErrorState } from '@/components/ui/ErrorState'
 import { EmptyState } from '@/components/ui/EmptyState'
@@ -42,16 +40,9 @@ export function SetsPage() {
 
   return (
     <div>
-      <div className="mb-6 flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between">
-        <div>
-          <h1 className="font-display text-2xl font-semibold text-ink dark:text-white sm:text-3xl">Bộ từ vựng</h1>
-          <p className="mt-1 text-ink-soft dark:text-white/60">Chọn một bộ từ để bắt đầu buổi học.</p>
-        </div>
-        <Link to="/sets/create">
-          <Button>
-            <Plus className="h-4 w-4" /> Tạo bộ mới-Tạo theo yêu cầu liên hệ admin
-          </Button>
-        </Link>
+      <div className="mb-6">
+        <h1 className="font-display text-2xl font-semibold text-ink dark:text-white sm:text-3xl">Bộ từ vựng</h1>
+        <p className="mt-1 text-ink-soft dark:text-white/60">Chọn một bộ từ để bắt đầu buổi học.</p>
       </div>
 
       <div className="relative mb-6 max-w-md">
@@ -75,7 +66,7 @@ export function SetsPage() {
           description={
             debouncedQuery
               ? 'Thử tìm với từ khóa khác.'
-              : 'Hãy tạo bộ từ vựng đầu tiên của bạn để bắt đầu học.'
+              : 'Liên hệ admin để được cung cấp bộ từ vựng phù hợp.'
           }
         />
       ) : (

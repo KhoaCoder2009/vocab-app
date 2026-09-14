@@ -360,7 +360,7 @@ export function ReviewPage() {
           animate={{ opacity: 1, y: 0 }}
           exit={{ opacity: 0, y: -12 }}
           transition={{ duration: 0.25 }}
-          className="rounded-[24px] border border-ink/[0.06] bg-white p-8 text-center shadow-card dark:border-white/[0.06] dark:bg-[#1A1D2E]"
+          className="rounded-[24px] border border-border bg-white p-8 text-center shadow-card dark:border-slate-700 dark:bg-slate-800"
         >
           <div className="mb-3 inline-flex items-center gap-2 rounded-full bg-coral-100 px-3 py-1 text-xs font-medium text-coral-600 dark:bg-coral-500/15 dark:text-coral-400">
             <BookOpen className="h-3 w-3" />
@@ -371,7 +371,7 @@ export function ReviewPage() {
           <div className="mt-2 flex flex-wrap items-center justify-center gap-2">
             {vocab.pronunciation && <p className="text-ink-soft dark:text-white/50">{vocab.pronunciation}</p>}
             {formattedPos && (
-              <span className="rounded-full bg-violet-100 px-2.5 py-0.5 text-xs font-medium text-violet-600 dark:bg-violet-500/15 dark:text-violet-300">
+              <span className="rounded-full bg-violet-100 px-3 py-1 text-sm font-semibold text-violet-600 dark:bg-violet-500/15 dark:text-violet-300">
                 {formattedPos}
               </span>
             )}

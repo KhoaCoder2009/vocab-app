@@ -125,8 +125,8 @@ export function DashboardPage() {
                 <CartesianGrid strokeDasharray="3 3" stroke="currentColor" className="text-ink/5 dark:text-white/5" />
                 <XAxis dataKey="day" fontSize={12} tickLine={false} axisLine={false} />
                 <YAxis fontSize={12} tickLine={false} axisLine={false} allowDecimals={false} />
-                <Tooltip contentStyle={{ borderRadius: 12, border: 'none', boxShadow: '0 10px 30px -10px rgba(27,31,59,0.25)' }} />
-                <Line type="monotone" dataKey="words" stroke="#0EA47A" strokeWidth={3} dot={{ r: 3 }} />
+                <Tooltip contentStyle={{ borderRadius: 12, border: '1px solid var(--color-border)', boxShadow: 'var(--shadow-soft)' }} />
+                <Line type="monotone" dataKey="words" stroke="var(--color-primary)" strokeWidth={3} dot={{ r: 3 }} />
               </LineChart>
             </ResponsiveContainer>
           </div>
@@ -140,8 +140,8 @@ export function DashboardPage() {
                 <CartesianGrid strokeDasharray="3 3" stroke="currentColor" className="text-ink/5 dark:text-white/5" />
                 <XAxis dataKey="day" fontSize={12} tickLine={false} axisLine={false} />
                 <YAxis fontSize={12} tickLine={false} axisLine={false} domain={[0, 100]} />
-                <Tooltip contentStyle={{ borderRadius: 12, border: 'none', boxShadow: '0 10px 30px -10px rgba(27,31,59,0.25)' }} />
-                <Line type="monotone" dataKey="accuracy" stroke="#7C6FF0" strokeWidth={3} dot={{ r: 3 }} />
+                <Tooltip contentStyle={{ borderRadius: 12, border: '1px solid var(--color-border)', boxShadow: 'var(--shadow-soft)' }} />
+                <Line type="monotone" dataKey="accuracy" stroke="var(--color-accent)" strokeWidth={3} dot={{ r: 3 }} />
               </LineChart>
             </ResponsiveContainer>
           </div>

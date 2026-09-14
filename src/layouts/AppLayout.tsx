@@ -27,9 +27,9 @@ export function AppLayout() {
   const displayName = profile?.full_name || user?.email?.split('@')[0] || 'Bạn'
 
   return (
-    <div className="min-h-screen bg-paper dark:bg-[#12141F]">
+    <div className="min-h-screen bg-paper dark:bg-slate-900">
       {/* Desktop sidebar */}
-      <aside className="fixed inset-y-0 left-0 z-30 hidden w-64 flex-col border-r border-ink/[0.06] bg-white/80 backdrop-blur-xl dark:border-white/[0.06] dark:bg-[#161826]/80 lg:flex">
+      <aside className="fixed inset-y-0 left-0 z-30 hidden w-64 flex-col border-r border-border bg-white backdrop-blur-xl dark:border-slate-700 dark:bg-slate-900 lg:flex">
         <div className="flex items-center gap-2 px-6 py-6">
           <div className="flex h-9 w-9 items-center justify-center rounded-xl bg-teal-500 text-white">
             <span className="font-display text-xl font-bold">K</span>
@@ -47,7 +47,7 @@ export function AppLayout() {
                   'flex items-center gap-3 rounded-xl px-3.5 py-2.5 text-sm font-medium text-ink-soft transition-colors dark:text-white/60',
                   isActive
                     ? 'bg-teal-500/10 text-teal-600 dark:text-teal-400'
-                    : 'hover:bg-ink/[0.04] hover:text-ink dark:hover:bg-white/[0.06] dark:hover:text-white'
+                    : 'hover:bg-slate-100 hover:text-ink dark:hover:bg-slate-800 dark:hover:text-white'
                 )
               }
             >
@@ -69,7 +69,7 @@ export function AppLayout() {
           </div>
           <button
             onClick={toggleTheme}
-            className="flex w-full items-center gap-3 rounded-xl px-3.5 py-2.5 text-sm font-medium text-ink-soft hover:bg-ink/[0.04] dark:text-white/60 dark:hover:bg-white/[0.06]"
+            className="flex w-full items-center gap-3 rounded-xl px-3.5 py-2.5 text-sm font-medium text-ink-soft hover:bg-slate-100 dark:text-slate-300 dark:hover:bg-slate-800"
           >
             {theme === 'dark' ? <Sun className="h-[18px] w-[18px]" /> : <Moon className="h-[18px] w-[18px]" />}
             {theme === 'dark' ? 'Chế độ sáng' : 'Chế độ tối'}
@@ -85,7 +85,7 @@ export function AppLayout() {
       </aside>
 
       {/* Mobile top bar */}
-      <header className="sticky top-0 z-30 flex items-center justify-between border-b border-ink/[0.06] bg-white/80 px-4 py-3 backdrop-blur-xl dark:border-white/[0.06] dark:bg-[#161826]/80 lg:hidden">
+      <header className="sticky top-0 z-30 flex items-center justify-between border-b border-border bg-white px-4 py-3 backdrop-blur-xl dark:border-slate-700 dark:bg-slate-900 lg:hidden">
         <div className="flex items-center gap-2">
           <div className="flex h-8 w-8 items-center justify-center rounded-lg bg-teal-500 text-white">
             <span className="font-display text-lg font-bold">K</span>
@@ -116,7 +116,7 @@ export function AppLayout() {
       </main>
 
       {/* Mobile bottom nav */}
-      <nav className="fixed inset-x-0 bottom-0 z-30 flex items-center justify-around border-t border-ink/[0.06] bg-white/95 py-2 backdrop-blur-xl dark:border-white/[0.06] dark:bg-[#161826]/95 lg:hidden">
+      <nav className="fixed inset-x-0 bottom-0 z-30 flex items-center justify-around border-t border-border bg-white py-2 backdrop-blur-xl dark:border-slate-700 dark:bg-slate-900 lg:hidden">
         {navItems.map((item) => (
           <NavLink
             key={item.to}

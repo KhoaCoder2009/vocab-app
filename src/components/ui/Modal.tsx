@@ -24,7 +24,7 @@ export function Modal({ open, onClose, title, children, className }: ModalProps)
         >
           <motion.div
             className={cn(
-              'w-full max-w-lg rounded-[24px] bg-white p-6 shadow-lift dark:bg-[#1A1D2E]',
+              'w-full max-w-lg rounded-[24px] bg-white p-6 shadow-lift dark:bg-slate-800',
               className
             )}
             initial={{ opacity: 0, scale: 0.95, y: 10 }}

@@ -141,7 +141,7 @@ export function SetDetailPage() {
                   <p className="font-display font-semibold text-ink dark:text-white">{w.word}</p>
                   {w.pronunciation && <span className="text-xs text-ink-soft dark:text-white/50">{w.pronunciation}</span>}
                   {w.part_of_speech && (
-                    <span className="rounded-full bg-violet-100 px-2 py-0.5 text-[11px] font-medium text-violet-600 dark:bg-violet-500/15 dark:text-violet-300">
+                    <span className="rounded-full bg-violet-100 px-3 py-1 text-sm font-semibold text-violet-600 dark:bg-violet-500/15 dark:text-violet-300">
                       {w.part_of_speech}
                     </span>
                   )}

@@ -4,7 +4,7 @@ import { Button } from '@/components/ui/Button'
 
 export function NotFoundPage() {
   return (
-    <div className="flex min-h-screen flex-col items-center justify-center bg-paper px-6 text-center dark:bg-[#12141F]">
+    <div className="flex min-h-screen flex-col items-center justify-center bg-paper px-6 text-center dark:bg-slate-900">
       <Compass className="mb-4 h-12 w-12 text-teal-500" />
       <h1 className="font-display text-3xl font-semibold text-ink dark:text-white">Không tìm thấy trang</h1>
       <p className="mt-2 max-w-sm text-ink-soft dark:text-white/60">
