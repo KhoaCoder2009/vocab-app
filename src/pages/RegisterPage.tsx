@@ -51,12 +51,12 @@ export function RegisterPage() {
 
       <form onSubmit={handleSubmit} className="mt-8 space-y-4">
         <Input
-          label="Họ và tên"
+          label="Username"
           name="fullName"
           autoComplete="name"
           value={fullName}
           onChange={(e) => setFullName(e.target.value)}
-          placeholder="Nguyễn Văn A"
+          placeholder="Username"
         />
         <Input
           label="Email"

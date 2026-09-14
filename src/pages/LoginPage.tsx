@@ -49,13 +49,13 @@ export function LoginPage() {
           placeholder="ban@email.com"
         />
         <Input
-          label="Mật khẩu"
+          label="Password"
           type="password"
           name="password"
           autoComplete="current-password"
           value={password}
           onChange={(e) => setPassword(e.target.value)}
-          placeholder="••••••••"
+          placeholder="Password"
         />
         {error && <p className="text-sm text-rose-500">{error}</p>}
         <div className="flex justify-end">

@@ -79,15 +79,10 @@ export function LandingPage() {
           </div>
           <span className="font-display text-lg font-semibold text-ink dark:text-white">learnvocab</span>
         </div>
-        <div className="flex items-center gap-3">
+        <div className="flex items-center">
           <Link to="/login">
-            <Button variant="ghost" size="sm">
+            <Button variant="primary" size="sm" className="border-2 border-teal-300/40 px-5 shadow-[0_8px_20px_-6px_rgba(14,164,122,0.65)]">
               Đăng nhập
-            </Button>
-          </Link>
-          <Link to="/register">
-            <Button variant="primary" size="sm">
-              Bắt đầu miễn phí
             </Button>
           </Link>
         </div>
