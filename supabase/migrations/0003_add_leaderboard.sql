@@ -1,7 +1,7 @@
 -- Public leaderboard aggregates completed study sessions without exposing raw session rows.
 create or replace function public.get_leaderboard(p_limit integer default 20)
 returns table (
-  position bigint,
+  rank_position bigint,
   user_id uuid,
   display_name text,
   avatar_url text,
@@ -33,7 +33,7 @@ as $$
     group by s.user_id, p.full_name, p.avatar_url
   )
   select
-    dense_rank() over (order by points desc, words desc, accuracy desc) as position,
+    dense_rank() over (order by points desc, words desc, accuracy desc) as rank_position,
     user_id,
     display_name,
     avatar_url,

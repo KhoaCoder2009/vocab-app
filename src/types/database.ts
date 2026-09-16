@@ -97,7 +97,7 @@ export interface UserStreak {
 }
 
 export interface LeaderboardEntry {
-  position: number
+  rank_position: number
   user_id: string
   display_name: string
   avatar_url: string | null

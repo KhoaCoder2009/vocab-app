@@ -170,7 +170,7 @@ export function StatisticsPage() {
                   )}
                 >
                   <span className="w-8 text-center font-display text-lg font-semibold text-ink-soft dark:text-slate-300">
-                    {entry.position}
+                    {entry.rank_position}
                   </span>
                   <div className="flex h-9 w-9 shrink-0 items-center justify-center rounded-full bg-violet-100 font-display font-semibold text-violet-600 dark:bg-violet-500/15 dark:text-violet-300">
                     {entry.display_name.charAt(0).toUpperCase()}
