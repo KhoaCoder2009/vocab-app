@@ -1,5 +1,5 @@
 import { useEffect, useMemo, useState } from 'react'
-import { BarChart3, Target, CheckCircle2, XCircle, Flame } from 'lucide-react'
+import { BarChart3, Target, CheckCircle2, XCircle, Flame, Trophy } from 'lucide-react'
 import { BarChart, Bar, XAxis, YAxis, Tooltip, ResponsiveContainer, CartesianGrid } from 'recharts'
 import { useAuth } from '@/hooks/useAuth'
 import { statsService, streakService } from '@/services/statsService'
@@ -8,7 +8,7 @@ import { Button } from '@/components/ui/Button'
 import { PageLoading } from '@/components/ui/Spinner'
 import { ErrorState } from '@/components/ui/ErrorState'
 import { cn } from '@/lib/utils'
-import type { StudySession, UserStreak } from '@/types/database'
+import type { LeaderboardEntry, StudySession, UserStreak } from '@/types/database'
 
 type RangeKey = 7 | 30 | 90
 
@@ -23,6 +23,7 @@ export function StatisticsPage() {
     sessions: StudySession[]
   } | null>(null)
   const [streak, setStreak] = useState<UserStreak | null>(null)
+  const [leaderboard, setLeaderboard] = useState<LeaderboardEntry[]>([])
   const [range, setRange] = useState<RangeKey>(7)
   const [loading, setLoading] = useState(true)
   const [error, setError] = useState(false)
@@ -32,9 +33,14 @@ export function StatisticsPage() {
     setLoading(true)
     setError(false)
     try {
-      const [ov, st] = await Promise.all([statsService.overview(user.id), streakService.get(user.id)])
+      const [ov, st, ranking] = await Promise.all([
+        statsService.overview(user.id),
+        streakService.get(user.id),
+        statsService.leaderboard().catch(() => []),
+      ])
       setOverview(ov)
       setStreak(st)
+      setLeaderboard(ranking)
     } catch {
       setError(true)
     } finally {
@@ -134,6 +140,59 @@ export function StatisticsPage() {
             </BarChart>
           </ResponsiveContainer>
         </div>
+      </Card>
+
+      <Card className="mt-6 overflow-hidden">
+        <div className="flex items-center gap-3 border-b border-border px-6 py-5 dark:border-slate-700">
+          <div className="flex h-10 w-10 items-center justify-center rounded-xl bg-coral-100 text-coral-600 dark:bg-coral-500/15 dark:text-coral-400">
+            <Trophy className="h-5 w-5" />
+          </div>
+          <div>
+            <h3 className="font-display text-lg font-semibold text-ink dark:text-white">Bảng xếp hạng</h3>
+            <p className="text-sm text-ink-soft dark:text-slate-300">Top người học theo tổng điểm</p>
+          </div>
+        </div>
+
+        {leaderboard.length === 0 ? (
+          <p className="px-6 py-8 text-center text-sm text-ink-soft dark:text-slate-300">
+            Chưa có dữ liệu xếp hạng.
+          </p>
+        ) : (
+          <div className="divide-y divide-border dark:divide-slate-700">
+            {leaderboard.map((entry) => {
+              const isCurrentUser = entry.user_id === user?.id
+              return (
+                <div
+                  key={entry.user_id}
+                  className={cn(
+                    'flex items-center gap-3 px-6 py-3.5',
+                    isCurrentUser && 'bg-teal-100/60 dark:bg-blue-500/10'
+                  )}
+                >
+                  <span className="w-8 text-center font-display text-lg font-semibold text-ink-soft dark:text-slate-300">
+                    {entry.position}
+                  </span>
+                  <div className="flex h-9 w-9 shrink-0 items-center justify-center rounded-full bg-violet-100 font-display font-semibold text-violet-600 dark:bg-violet-500/15 dark:text-violet-300">
+                    {entry.display_name.charAt(0).toUpperCase()}
+                  </div>
+                  <div className="min-w-0 flex-1">
+                    <p className="truncate text-sm font-semibold text-ink dark:text-white">
+                      {entry.display_name}
+                      {isCurrentUser && <span className="ml-2 text-xs font-medium text-teal-600 dark:text-blue-400">Bạn</span>}
+                    </p>
+                    <p className="text-xs text-ink-soft dark:text-slate-400">
+                      {entry.words} từ · {entry.accuracy ?? 0}% chính xác
+                    </p>
+                  </div>
+                  <div className="text-right">
+                    <p className="font-display font-semibold text-teal-600 dark:text-blue-400">{entry.points}</p>
+                    <p className="text-xs text-ink-soft dark:text-slate-400">điểm</p>
+                  </div>
+                </div>
+              )
+            })}
+          </div>
+        )}
       </Card>
     </div>
   )

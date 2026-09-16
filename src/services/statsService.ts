@@ -1,5 +1,5 @@
 import { supabase } from '@/lib/supabase'
-import type { UserStreak } from '@/types/database'
+import type { LeaderboardEntry, UserStreak } from '@/types/database'
 
 export const favoritesService = {
   async list(userId: string) {
@@ -50,6 +50,12 @@ export const streakService = {
 }
 
 export const statsService = {
+  async leaderboard(limit = 20): Promise<LeaderboardEntry[]> {
+    const { data, error } = await supabase.rpc('get_leaderboard', { p_limit: limit })
+    if (error) throw error
+    return (data || []) as LeaderboardEntry[]
+  },
+
   async overview(userId: string) {
     const [{ count: totalAnswers }, { count: correctAnswers }, { data: sessions }] = await Promise.all([
       supabase.from('study_answers').select('*', { count: 'exact', head: true }).eq('user_id', userId),

@@ -96,6 +96,17 @@ export interface UserStreak {
   updated_at: string
 }
 
+export interface LeaderboardEntry {
+  position: number
+  user_id: string
+  display_name: string
+  avatar_url: string | null
+  points: number
+  sessions: number
+  words: number
+  accuracy: number | null
+}
+
 // Kiểu mở rộng dùng trong UI
 export interface VocabularyWithProgress extends Vocabulary {
   progress?: UserVocabularyProgress | null
