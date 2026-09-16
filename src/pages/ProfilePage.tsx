@@ -110,9 +110,20 @@ export function ProfilePage() {
           </div>
         </div>
 
-        <form onSubmit={handleSave} className="mt-6 flex flex-col gap-3 sm:flex-row sm:items-end">
+        <div className="mt-6 border-t border-border pt-6 dark:border-slate-700">
+          <h2 className="font-display text-lg font-semibold text-ink dark:text-white">Thông tin cá nhân</h2>
+          <p className="mt-1 text-sm text-ink-soft dark:text-slate-300">Cập nhật tên hiển thị của bạn.</p>
+        </div>
+
+        <form onSubmit={handleSave} className="mt-4 flex flex-col gap-3 sm:flex-row sm:items-end">
           <div className="flex-1">
-            <Input label="Tên hiển thị" value={fullName} onChange={(e) => setFullName(e.target.value)} />
+            <Input
+              label="Username"
+              name="fullName"
+              autoComplete="name"
+              value={fullName}
+              onChange={(e) => setFullName(e.target.value)}
+            />
           </div>
           <Button type="submit" loading={saving}>
             Lưu thay đổi
