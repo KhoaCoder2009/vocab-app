@@ -37,6 +37,16 @@ export interface Vocabulary {
   pronunciation: string | null
   audio_url: string | null
   image_url: string | null
+  ielts_band: number | null
+  ielts_topic: string | null
+  cefr_level: string | null
+  ielts_use: string | null
+  ielts_skills: string[] | null
+  collocations: string[] | null
+  synonyms: string[] | null
+  antonyms: string[] | null
+  word_family: string[] | null
+  usage_notes: string | null
   created_at: string
   updated_at: string
 }

@@ -147,6 +147,13 @@ export function SetDetailPage() {
                   )}
                 </div>
                 <p className="mt-0.5 text-sm text-ink-soft dark:text-white/60">{w.meaning}</p>
+                {(w.ielts_band || w.cefr_level || w.ielts_topic) && (
+                  <div className="mt-2 flex flex-wrap gap-2 text-xs text-ink-soft dark:text-slate-400">
+                    {w.ielts_band && <span className="rounded-full bg-teal-100 px-2 py-0.5 font-semibold text-teal-700 dark:bg-blue-500/15 dark:text-blue-300">Band {w.ielts_band}</span>}
+                    {w.cefr_level && <span className="rounded-full bg-slate-100 px-2 py-0.5 font-semibold dark:bg-slate-700">CEFR {w.cefr_level}</span>}
+                    {w.ielts_topic && <span>{w.ielts_topic}</span>}
+                  </div>
+                )}
               </div>
             </Card>
           ))}
