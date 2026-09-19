@@ -1,5 +1,5 @@
 import { NavLink, Outlet } from 'react-router-dom'
-import { Home, BookOpen, RotateCcw, BarChart3, User, Moon, Sun } from 'lucide-react'
+import { Home, BookOpen, RotateCcw, BarChart3, User, Moon, Sun, Languages } from 'lucide-react'
 import { useAuth } from '@/hooks/useAuth'
 import { useTheme } from '@/hooks/useTheme'
 import { cn } from '@/lib/utils'
@@ -9,6 +9,7 @@ const navItems = [
   { to: '/sets', label: 'Bộ từ vựng', icon: BookOpen },
   { to: '/review', label: 'Ôn tập', icon: RotateCcw },
   { to: '/statistics', label: 'Thống kê', icon: BarChart3 },
+  { to: '/grammar', label: 'Ôn ngữ pháp', icon: Languages },
   { to: '/profile', label: 'Hồ sơ', icon: User },
 ]
 

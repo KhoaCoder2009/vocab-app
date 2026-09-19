@@ -27,6 +27,7 @@ const ResultPage = lazy(() => import('@/pages/ResultPage').then((m) => ({ defaul
 const ReviewPage = lazy(() => import('@/pages/ReviewPage').then((m) => ({ default: m.ReviewPage })))
 const FavoritesPage = lazy(() => import('@/pages/FavoritesPage').then((m) => ({ default: m.FavoritesPage })))
 const StatisticsPage = lazy(() => import('@/pages/StatisticsPage').then((m) => ({ default: m.StatisticsPage })))
+const GrammarPage = lazy(() => import('@/pages/GrammarPage').then((m) => ({ default: m.GrammarPage })))
 const ProfilePage = lazy(() => import('@/pages/ProfilePage').then((m) => ({ default: m.ProfilePage })))
 const NotFoundPage = lazy(() => import('@/pages/NotFoundPage').then((m) => ({ default: m.NotFoundPage })))
 
@@ -60,6 +61,8 @@ export default function App() {
                   <Route path="/review" element={<ReviewPage />} />
                   <Route path="/favorites" element={<FavoritesPage />} />
                   <Route path="/statistics" element={<StatisticsPage />} />
+                  <Route path="/grammar" element={<GrammarPage />} />
+                  <Route path="/grammar/:tenseId" element={<GrammarPage />} />
                   <Route path="/profile" element={<ProfilePage />} />
                 </Route>
 
