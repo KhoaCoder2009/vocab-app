@@ -8,6 +8,7 @@ import {
   Brain,
   ArrowRight,
   Volume2,
+  Menu,
 } from 'lucide-react'
 import { Button } from '@/components/ui/Button'
 
@@ -70,16 +71,28 @@ const steps = [
 
 export function LandingPage() {
   return (
-    <div className="overflow-x-hidden bg-paper dark:bg-slate-900">
+    <div className="overflow-x-hidden bg-white dark:bg-slate-900">
       {/* NAVBAR */}
-      <header className="mx-auto flex max-w-6xl items-center justify-between px-6 py-6">
+      <header className="mx-auto flex max-w-7xl items-center justify-between px-6 py-5 lg:px-10">
         <div className="flex items-center gap-2">
-          <div className="flex h-9 w-9 items-center justify-center rounded-xl bg-teal-500 text-white">
+          <div className="flex h-10 w-10 items-center justify-center rounded-2xl bg-teal-500 text-white shadow-[0_10px_24px_-12px_rgba(37,99,235,0.7)]">
             <span className="font-display text-xl font-bold">K</span>
           </div>
-          <span className="font-display text-lg font-semibold text-ink dark:text-white">learnvocab</span>
+          <span className="font-display text-xl font-semibold tracking-tight text-ink dark:text-white">learnvocab</span>
         </div>
-        <div className="flex items-center">
+        <nav className="hidden items-center gap-8 text-sm font-medium text-ink-soft dark:text-slate-300 md:flex">
+          <a href="#lo-trinh" className="transition-colors hover:text-teal-600">Lộ trình học</a>
+          <a href="#tinh-nang" className="transition-colors hover:text-teal-600">Tính năng</a>
+          <a href="#bo-tu" className="transition-colors hover:text-teal-600">Bộ từ vựng</a>
+        </nav>
+        <div className="flex items-center gap-3">
+          <button
+            type="button"
+            aria-label="Mở menu"
+            className="flex h-10 w-10 items-center justify-center rounded-full text-ink-soft hover:bg-slate-100 dark:text-slate-300 dark:hover:bg-slate-800 md:hidden"
+          >
+            <Menu className="h-5 w-5" />
+          </button>
           <Link to="/login">
             <Button variant="primary" size="sm" className="border-2 border-teal-300/40 px-5 shadow-[0_8px_20px_-6px_rgba(37,99,235,0.45)]">
               Đăng nhập
@@ -89,19 +102,20 @@ export function LandingPage() {
       </header>
 
       {/* HERO */}
-      <section className="mx-auto grid max-w-6xl grid-cols-1 items-center gap-12 px-6 pb-20 pt-10 lg:grid-cols-2 lg:pt-16">
+      <section className="mx-auto grid max-w-7xl grid-cols-1 items-center gap-12 px-6 pb-24 pt-16 lg:grid-cols-[1.05fr_0.95fr] lg:px-10 lg:pb-32 lg:pt-24">
         <motion.div
           initial={{ opacity: 0, y: 16 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.5 }}
         >
-          <h1 className="font-display text-4xl font-semibold leading-[1.1] text-ink dark:text-white sm:text-5xl lg:text-[3.4rem]">
-            Học từ vựng.
-            <br />
-            Ghi nhớ lâu hơn.
+          <p className="mb-5 text-sm font-semibold uppercase tracking-[0.18em] text-teal-600 dark:text-blue-400">
+            Học chăm chỉ, tiến bộ mỗi ngày
+          </p>
+          <h1 className="max-w-2xl font-display text-5xl font-semibold leading-[1.02] tracking-tight text-ink dark:text-white sm:text-6xl lg:text-[4.8rem]">
+            Từ vựng ở lại lâu hơn.
           </h1>
-          <p className="mt-5 max-w-md text-lg text-ink-soft dark:text-white/70">
-            Học bằng Flashcard, kiểm tra bằng cách điền từ và tự động ôn lại những từ bạn chưa nhớ.
+          <p className="mt-6 max-w-xl text-lg leading-8 text-ink-soft dark:text-slate-300 sm:text-xl">
+            Một không gian học tiếng Anh nhẹ nhàng, có lộ trình rõ ràng và đủ công cụ để bạn tự tin nhớ từ mới.
           </p>
           <div className="mt-8 flex flex-col gap-3 sm:flex-row">
             <Link to="/register">
@@ -111,24 +125,24 @@ export function LandingPage() {
             </Link>
             <Link to="/register">
               <Button variant="secondary" size="lg" className="w-full sm:w-auto">
-                Khám phá bộ từ vựng
+                Xem bộ từ vựng
               </Button>
             </Link>
           </div>
-          <div className="mt-10 flex items-center gap-6 text-sm text-ink-soft dark:text-white/60">
+          <div className="mt-10 flex flex-wrap items-center gap-x-6 gap-y-3 text-sm text-ink-soft dark:text-slate-300">
             <div>
-              <p className="font-display text-2xl font-semibold text-ink dark:text-white">100+</p>
-              <p>Từ vựng có sẵn</p>
-            </div>
-            <div className="h-8 w-px bg-ink/10 dark:bg-white/10" />
-            <div>
-              <p className="font-display text-2xl font-semibold text-ink dark:text-white">5</p>
-              <p>Bộ chủ đề</p>
+              <p className="font-display text-2xl font-semibold text-ink dark:text-white">4 bước</p>
+              <p>Để nhớ một từ</p>
             </div>
             <div className="h-8 w-px bg-ink/10 dark:bg-white/10" />
             <div>
               <p className="font-display text-2xl font-semibold text-ink dark:text-white">100%</p>
-              <p>Miễn phí</p>
+              <p>Tập trung vào việc học</p>
+            </div>
+            <div className="h-8 w-px bg-ink/10 dark:bg-white/10" />
+            <div>
+              <p className="font-display text-2xl font-semibold text-ink dark:text-white">∞</p>
+              <p>Ôn lại đến khi nhớ</p>
             </div>
           </div>
         </motion.div>
@@ -140,10 +154,10 @@ export function LandingPage() {
           transition={{ duration: 0.6, delay: 0.15 }}
           className="relative mx-auto h-[360px] w-full max-w-sm [perspective:1400px]"
         >
-          <div className="absolute inset-0 translate-x-6 translate-y-10 rotate-6 rounded-[24px] bg-violet-100 shadow-card dark:bg-violet-500/10" />
-          <div className="absolute inset-0 -translate-x-4 translate-y-5 -rotate-3 rounded-[24px] bg-coral-100 shadow-card dark:bg-coral-500/10" />
+          <div className="absolute inset-0 translate-x-6 translate-y-10 rotate-6 rounded-[32px] bg-violet-100 shadow-card dark:bg-violet-500/10" />
+          <div className="absolute inset-0 -translate-x-4 translate-y-5 -rotate-3 rounded-[32px] bg-teal-100 shadow-card dark:bg-blue-500/10" />
           <motion.div
-            className="absolute inset-0 rounded-[24px] bg-white p-8 shadow-lift dark:bg-slate-800 [transform-style:preserve-3d]"
+            className="absolute inset-0 rounded-[32px] border border-border bg-white p-8 shadow-[0_30px_80px_-30px_rgba(15,23,42,0.3)] dark:border-slate-700 dark:bg-slate-800 [transform-style:preserve-3d]"
             animate={{ rotateY: [0, 0, 180, 180, 0] }}
             transition={{ duration: 6, repeat: Infinity, times: [0, 0.4, 0.5, 0.9, 1], ease: 'easeInOut' }}
           >
@@ -159,7 +173,7 @@ export function LandingPage() {
       </section>
 
       {/* FEATURES */}
-      <section className="mx-auto max-w-6xl px-6 py-16">
+      <section id="tinh-nang" className="mx-auto max-w-7xl px-6 py-20 lg:px-10">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
@@ -168,10 +182,10 @@ export function LandingPage() {
           className="mx-auto max-w-xl text-center"
         >
           <h2 className="font-display text-3xl font-semibold text-ink dark:text-white">
-            Một hệ thống học đầy đủ, không chỉ là thẻ ghi nhớ
+            Học đúng cách, từ những việc nhỏ
           </h2>
           <p className="mt-3 text-ink-soft dark:text-white/60">
-            Mỗi bước trong quy trình học được thiết kế để đưa từ vựng vào trí nhớ dài hạn.
+            Mỗi tính năng được đặt đúng chỗ để bạn tập trung vào việc quan trọng nhất: nhớ và dùng được từ.
           </p>
         </motion.div>
 
@@ -196,7 +210,7 @@ export function LandingPage() {
       </section>
 
       {/* PROCESS */}
-      <section className="bg-ink py-16 text-white">
+      <section id="lo-trinh" className="bg-ink py-20 text-white">
         <div className="mx-auto max-w-6xl px-6">
           <motion.h2
             initial={{ opacity: 0, y: 20 }}
@@ -204,7 +218,7 @@ export function LandingPage() {
             viewport={{ once: true }}
             className="text-center font-display text-3xl font-semibold"
           >
-            Quy trình học 4 bước
+            Một lộ trình rõ ràng để không bị lạc hướng
           </motion.h2>
           <div className="mt-12 grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-4">
             {steps.map((s, i) => (
@@ -229,7 +243,7 @@ export function LandingPage() {
       </section>
 
       {/* FOR STUDENTS */}
-      <section className="bg-slate-50 py-16 dark:bg-slate-900">
+      <section id="bo-tu" className="bg-slate-50 py-20 dark:bg-slate-900">
         <div className="mx-auto max-w-6xl px-6">
           <motion.div
             initial={{ opacity: 0, y: 20 }}
