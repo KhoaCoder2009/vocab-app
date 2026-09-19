@@ -1,6 +1,6 @@
 import { useEffect, useMemo, useState } from 'react'
 import { Link, useNavigate, useParams } from 'react-router-dom'
-import { CheckCircle2, ChevronRight, CircleHelp, PenLine, Trophy } from 'lucide-react'
+import { CheckCircle2, ChevronRight, CircleHelp, PenLine, Trophy, BookOpen, ClipboardCheck } from 'lucide-react'
 import type { GrammarTense } from '@/data/grammarTenses'
 import { grammarService, type GrammarProgress } from '@/services/grammarService'
 import { useAuth } from '@/hooks/useAuth'
@@ -114,6 +114,7 @@ export function GrammarPage() {
 
 function TenseLesson({ tense, onProgress }: { tense: GrammarTense; onProgress: (progress: GrammarProgress) => void }) {
   const [exerciseIndex, setExerciseIndex] = useState(0)
+  const [lessonMode, setLessonMode] = useState<'learn' | 'practice'>('learn')
   const [answer, setAnswer] = useState('')
   const [submitted, setSubmitted] = useState(false)
   const [result, setResult] = useState<{ correct: boolean; answer: string; explanation: string } | null>(null)
@@ -121,6 +122,7 @@ function TenseLesson({ tense, onProgress }: { tense: GrammarTense; onProgress: (
 
   useEffect(() => {
     setExerciseIndex(0)
+    setLessonMode('learn')
     setAnswer('')
     setSubmitted(false)
     setResult(null)
@@ -200,7 +202,46 @@ function TenseLesson({ tense, onProgress }: { tense: GrammarTense; onProgress: (
         </Card>
       </div>
 
-      <Card className="p-6 sm:p-8">
+      <div className="flex flex-wrap gap-2 rounded-2xl bg-slate-100 p-2 dark:bg-slate-800">
+        <button
+          type="button"
+          onClick={() => setLessonMode('learn')}
+          className={`flex flex-1 items-center justify-center gap-2 rounded-xl px-4 py-3 text-sm font-semibold transition-colors sm:flex-none ${
+            lessonMode === 'learn' ? 'bg-white text-teal-700 shadow-sm dark:bg-slate-700 dark:text-blue-300' : 'text-ink-soft hover:text-ink dark:text-slate-300 dark:hover:text-white'
+          }`}
+        >
+          <BookOpen className="h-4 w-4" /> Học lý thuyết
+        </button>
+        <button
+          type="button"
+          onClick={() => setLessonMode('practice')}
+          className={`flex flex-1 items-center justify-center gap-2 rounded-xl px-4 py-3 text-sm font-semibold transition-colors sm:flex-none ${
+            lessonMode === 'practice' ? 'bg-white text-teal-700 shadow-sm dark:bg-slate-700 dark:text-blue-300' : 'text-ink-soft hover:text-ink dark:text-slate-300 dark:hover:text-white'
+          }`}
+        >
+          <ClipboardCheck className="h-4 w-4" /> Làm bài tập
+        </button>
+      </div>
+
+      {lessonMode === 'learn' && (
+        <Card className="p-6 sm:p-8">
+          <div className="flex items-center gap-2">
+            <BookOpen className="h-5 w-5 text-teal-500" />
+            <h3 className="font-display text-lg font-semibold text-ink dark:text-white">Vocabulary thường dùng</h3>
+          </div>
+          <div className="mt-4 grid gap-3 sm:grid-cols-2">
+            {tense.vocabulary.map((item) => (
+              <div key={item.english} className="rounded-xl border border-border p-4 dark:border-slate-700">
+                <p className="font-semibold text-ink dark:text-white">{item.english}</p>
+                <p className="mt-1 text-sm text-ink-soft dark:text-slate-300">{item.vietnamese}</p>
+                <p className="mt-2 text-sm italic text-ink-soft dark:text-slate-400">{item.example}</p>
+              </div>
+            ))}
+          </div>
+        </Card>
+      )}
+
+      {lessonMode === 'practice' && <Card className="p-6 sm:p-8">
         <div className="flex flex-wrap items-center justify-between gap-3">
           <div>
             <p className="text-sm font-semibold uppercase tracking-[0.14em] text-teal-600 dark:text-blue-400">Writing practice</p>
@@ -237,7 +278,7 @@ function TenseLesson({ tense, onProgress }: { tense: GrammarTense; onProgress: (
           </div>
         )}
         <div className="mt-5"><ProgressBar value={exerciseIndex + 1} max={tense.writingExercises.length} colorClassName="bg-violet-500" /></div>
-      </Card>
+      </Card>}
 
       <p className="text-xs text-ink-soft dark:text-slate-400">Nguồn tham khảo: British Council, English Grammar Reference (Author: Not specified). Nội dung được hệ thống biên soạn lại bằng tiếng Việt dễ hiểu, không sao chép nguyên văn.</p>
     </main>
