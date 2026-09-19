@@ -1,47 +1,47 @@
 import { useEffect, useMemo, useState } from 'react'
 import { Link, useNavigate, useParams } from 'react-router-dom'
 import { CheckCircle2, ChevronRight, CircleHelp, PenLine, Trophy } from 'lucide-react'
-import { grammarTenses, tenseCategories, type GrammarTense } from '@/data/grammarTenses'
-import { normalizeAnswer } from '@/lib/utils'
+import type { GrammarTense } from '@/data/grammarTenses'
+import { grammarService, type GrammarProgress } from '@/services/grammarService'
+import { useAuth } from '@/hooks/useAuth'
 import { Button } from '@/components/ui/Button'
 import { Card } from '@/components/ui/Card'
 import { ProgressBar } from '@/components/ui/ProgressBar'
-
-const progressKey = 'learnvocab-grammar-progress'
-
-type GrammarProgress = Record<string, { correct: number; total: number }>
-
-function readProgress(): GrammarProgress {
-  try {
-    return JSON.parse(localStorage.getItem(progressKey) || '{}') as GrammarProgress
-  } catch {
-    return {}
-  }
-}
 
 function getLevelLabel(level: number) {
   return ['Easy', 'Basic', 'Intermediate', 'Advanced', 'Challenge'][level - 1]
 }
 
-function isAnswerAccepted(answer: string, acceptedAnswers: string[]) {
-  const normalized = normalizeAnswer(answer).replace(/[.!?]$/, '')
-  return acceptedAnswers.some((item) => normalizeAnswer(item).replace(/[.!?]$/, '') === normalized)
-}
-
 export function GrammarPage() {
   const { tenseId } = useParams<{ tenseId?: string }>()
   const navigate = useNavigate()
-  const [selectedId, setSelectedId] = useState(tenseId || grammarTenses[0].id)
-  const [progress, setProgress] = useState<GrammarProgress>(() => readProgress())
-  const selectedTense = grammarTenses.find((tense) => tense.id === selectedId) || grammarTenses[0]
+  const { user } = useAuth()
+  const [lessons, setLessons] = useState<GrammarTense[]>([])
+  const [selectedId, setSelectedId] = useState(tenseId || '')
+  const [progress, setProgress] = useState<GrammarProgress[]>([])
+  const [loading, setLoading] = useState(true)
+  const [error, setError] = useState(false)
+  const selectedTense = lessons.find((tense) => tense.id === selectedId) || lessons[0]
 
   useEffect(() => {
-    if (tenseId && grammarTenses.some((tense) => tense.id === tenseId)) setSelectedId(tenseId)
-  }, [tenseId])
+    if (!user) return
+    Promise.all([grammarService.listLessons(), grammarService.getProgress(user.id)])
+      .then(([loadedLessons, loadedProgress]) => {
+        setLessons(loadedLessons)
+        setProgress(loadedProgress)
+        setSelectedId((current) => current || loadedLessons[0]?.id || '')
+      })
+      .catch(() => setError(true))
+      .finally(() => setLoading(false))
+  }, [user])
+
+  useEffect(() => {
+    if (tenseId && lessons.some((tense) => tense.id === tenseId)) setSelectedId(tenseId)
+  }, [tenseId, lessons])
 
   const overallProgress = useMemo(() => {
-    const total = grammarTenses.reduce((sum, tense) => sum + (progress[tense.id]?.total || 0), 0)
-    const correct = grammarTenses.reduce((sum, tense) => sum + (progress[tense.id]?.correct || 0), 0)
+    const total = progress.reduce((sum, item) => sum + item.attempts, 0)
+    const correct = progress.reduce((sum, item) => sum + item.correct_attempts, 0)
     return total ? Math.round((correct / total) * 100) : 0
   }, [progress])
 
@@ -50,18 +50,12 @@ export function GrammarPage() {
     navigate(`/grammar/${tense.id}`)
   }
 
-  const updateProgress = (isCorrect: boolean) => {
-    const current = progress[selectedTense.id] || { correct: 0, total: 0 }
-    const next = {
-      ...progress,
-      [selectedTense.id]: {
-        correct: current.correct + (isCorrect ? 1 : 0),
-        total: current.total + 1,
-      },
-    }
-    setProgress(next)
-    localStorage.setItem(progressKey, JSON.stringify(next))
+  const updateProgress = (nextProgress: GrammarProgress) => {
+    setProgress((current) => [...current.filter((item) => item.lesson_id !== nextProgress.lesson_id), nextProgress])
   }
+
+  if (loading) return <div className="p-8 text-center text-ink-soft">Đang tải module ngữ pháp...</div>
+  if (error || lessons.length === 0) return <div className="p-8 text-center text-rose-600">Không thể tải dữ liệu ngữ pháp từ Supabase.</div>
 
   return (
     <div>
@@ -84,12 +78,12 @@ export function GrammarPage() {
 
       <div className="grid gap-6 lg:grid-cols-[260px_1fr]">
         <aside className="space-y-3">
-          {tenseCategories.map((category) => (
+          {(['Present', 'Past', 'Future'] as const).map((category) => (
             <div key={category}>
               <p className="mb-2 px-2 text-xs font-bold uppercase tracking-[0.14em] text-ink-soft dark:text-slate-400">{category}</p>
               <div className="space-y-1">
-                {grammarTenses.filter((tense) => tense.category === category).map((tense, index) => {
-                  const itemProgress = progress[tense.id]
+                {lessons.filter((tense) => tense.category === category).map((tense, index) => {
+                  const itemProgress = progress.find((item) => item.lesson_id === tense.id)
                   return (
                     <button
                       key={tense.id}
@@ -103,7 +97,7 @@ export function GrammarPage() {
                     >
                       <span className="w-5 text-xs font-bold opacity-70">{index + 1}</span>
                       <span className="min-w-0 flex-1 truncate text-sm font-semibold">{tense.name}</span>
-                      {itemProgress && <span className="text-xs opacity-70">{itemProgress.correct}/{itemProgress.total}</span>}
+                      {itemProgress && <span className="text-xs opacity-70">{itemProgress.correct_attempts}/{itemProgress.attempts}</span>}
                     </button>
                   )
                 })}
@@ -112,35 +106,40 @@ export function GrammarPage() {
           ))}
         </aside>
 
-        <TenseLesson tense={selectedTense} onAnswer={updateProgress} />
+        {selectedTense && <TenseLesson tense={selectedTense} onProgress={updateProgress} />}
       </div>
     </div>
   )
 }
 
-function TenseLesson({ tense, onAnswer }: { tense: GrammarTense; onAnswer: (isCorrect: boolean) => void }) {
+function TenseLesson({ tense, onProgress }: { tense: GrammarTense; onProgress: (progress: GrammarProgress) => void }) {
   const [exerciseIndex, setExerciseIndex] = useState(0)
   const [answer, setAnswer] = useState('')
   const [submitted, setSubmitted] = useState(false)
+  const [result, setResult] = useState<{ correct: boolean; answer: string; explanation: string } | null>(null)
   const exercise = tense.writingExercises[exerciseIndex]
-  const correct = submitted && isAnswerAccepted(answer, exercise.acceptedAnswers)
 
   useEffect(() => {
     setExerciseIndex(0)
     setAnswer('')
     setSubmitted(false)
+    setResult(null)
   }, [tense.id])
 
   const submit = () => {
     if (!answer.trim() || submitted) return
     setSubmitted(true)
-    onAnswer(isAnswerAccepted(answer, exercise.acceptedAnswers))
+    grammarService.submitAttempt(tense.id, exercise.id, answer).then((attempt) => {
+      setResult({ correct: attempt.is_correct, answer: attempt.correct_answer, explanation: attempt.explanation })
+      onProgress({ lesson_id: tense.id, attempts: attempt.attempts, correct_attempts: attempt.correct_attempts })
+    }).catch(() => setSubmitted(false))
   }
 
   const nextExercise = () => {
     setExerciseIndex((index) => (index + 1) % tense.writingExercises.length)
     setAnswer('')
     setSubmitted(false)
+    setResult(null)
   }
 
   return (
@@ -224,15 +223,15 @@ function TenseLesson({ tense, onAnswer }: { tense: GrammarTense; onAnswer: (isCo
           />
           <Button onClick={submit} disabled={!answer.trim() || submitted} size="lg"><PenLine className="h-4 w-4" /> Submit</Button>
         </div>
-        {submitted && (
-          <div className={`mt-5 rounded-2xl p-5 ${correct ? 'bg-emerald-50 dark:bg-emerald-500/10' : 'bg-rose-50 dark:bg-rose-500/10'}`}>
-            <p className={`flex items-center gap-2 font-semibold ${correct ? 'text-emerald-700 dark:text-emerald-300' : 'text-rose-700 dark:text-rose-300'}`}>
-              {correct ? <CheckCircle2 className="h-5 w-5" /> : <CircleHelp className="h-5 w-5" />} {correct ? 'Correct!' : 'Cần sửa một chút'}
+        {submitted && result && (
+          <div className={`mt-5 rounded-2xl p-5 ${result.correct ? 'bg-emerald-50 dark:bg-emerald-500/10' : 'bg-rose-50 dark:bg-rose-500/10'}`}>
+            <p className={`flex items-center gap-2 font-semibold ${result.correct ? 'text-emerald-700 dark:text-emerald-300' : 'text-rose-700 dark:text-rose-300'}`}>
+              {result.correct ? <CheckCircle2 className="h-5 w-5" /> : <CircleHelp className="h-5 w-5" />} {result.correct ? 'Correct!' : 'Cần sửa một chút'}
             </p>
-            <p className="mt-2 text-sm text-ink-soft dark:text-slate-300">Câu đúng tham khảo: <strong className="text-ink dark:text-white">{exercise.acceptedAnswers[0]}</strong></p>
-            <p className="mt-2 text-sm text-ink-soft dark:text-slate-300">{exercise.explanation}</p>
+            <p className="mt-2 text-sm text-ink-soft dark:text-slate-300">Câu đúng tham khảo: <strong className="text-ink dark:text-white">{result.answer}</strong></p>
+            <p className="mt-2 text-sm text-ink-soft dark:text-slate-300">{result.explanation}</p>
             <div className="mt-4 flex flex-wrap gap-3">
-              {!correct && <Button variant="secondary" onClick={() => { setAnswer(''); setSubmitted(false) }}>Thử lại</Button>}
+              {!result.correct && <Button variant="secondary" onClick={() => { setAnswer(''); setSubmitted(false); setResult(null) }}>Thử lại</Button>}
               <Button variant="ghost" onClick={nextExercise}><ChevronRight className="h-4 w-4" /> Câu tiếp theo</Button>
             </div>
           </div>
