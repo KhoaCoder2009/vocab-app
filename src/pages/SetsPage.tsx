@@ -92,8 +92,9 @@ export function SetsPage() {
       // Text search filter
       const matchesQuery = s.title.toLowerCase().includes(debouncedQuery.toLowerCase())
       
-      // Category filter
-      const matchesCategory = selectedCategory === 'all' || (s.category || 'Khác') === selectedCategory
+      // Category filter - use category_id if available, fallback to category
+      const categoryMatch = s.category_id || s.category || 'Khác'
+      const matchesCategory = selectedCategory === 'all' || categoryMatch === selectedCategory
       
       // Topic filter
       const matchesTopic = selectedTopic === 'all' || (s.topic || 'Tổng hợp') === selectedTopic

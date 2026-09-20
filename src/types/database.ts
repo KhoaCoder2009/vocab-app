@@ -18,7 +18,8 @@ export interface VocabularySet {
   difficulty: Difficulty
   is_public: boolean
   cover_color: string | null
-  category: string | null // IELTS Band 4.0-6.0, English 12, etc.
+  category: string | null // IELTS Band 4.0-6.0, English 12, etc. (display name)
+  category_id: string | null // ielts-band-4-5, english-12, etc. (for querying)
   topic: string | null // Work & Jobs, Education, Unit 1, etc.
   created_at: string
   updated_at: string
