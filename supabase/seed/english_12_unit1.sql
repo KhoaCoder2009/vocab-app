@@ -5,13 +5,15 @@
 
 -- ---- English 12 - Unit 1: Life Stories We Admire ----
 with new_set as (
-  insert into public.vocabulary_sets (owner_id, title, description, difficulty, is_public, cover_color)
+  insert into public.vocabulary_sets (owner_id, title, description, difficulty, is_public, cover_color, category, topic)
   select null, 
     'English 12 - Unit 1: Life Stories We Admire', 
     'Từ vựng Unit 1 SGK Tiếng Anh 12 - Life Stories We Admire. Chủ đề: Những câu chuyện cuộc đời đáng ngưỡng mộ.', 
     'medium', 
     true, 
-    'indigo'
+    'indigo',
+    'English 12',
+    'Unit 1: Life Stories'
   where not exists (select 1 from public.vocabulary_sets where title = 'English 12 - Unit 1: Life Stories We Admire')
   returning id
 )

@@ -6,8 +6,8 @@
 
 -- 1. IELTS Work & Jobs
 with new_set as (
-  insert into public.vocabulary_sets (owner_id, title, description, difficulty, is_public, cover_color)
-  select null, 'IELTS Work & Jobs', 'Từ vựng về công việc - IELTS Speaking Part 1 & 2, Band 4.0-6.0.', 'medium', true, 'blue'
+  insert into public.vocabulary_sets (owner_id, title, description, difficulty, is_public, cover_color, category, topic)
+  select null, 'IELTS Work & Jobs', 'Từ vựng về công việc - IELTS Speaking Part 1 & 2, Band 4.0-6.0.', 'medium', true, 'blue', 'IELTS Band 4.0-6.0', 'Work & Jobs', 'IELTS Band 4.0-6.0', 'Work & Jobs'
   where not exists (select 1 from public.vocabulary_sets where title = 'IELTS Work & Jobs')
   returning id
 )
@@ -37,8 +37,8 @@ select id, v.word, v.meaning, v.pos, v.pron, v.example, v.example_vi from new_se
 
 -- 2. IELTS Family
 with new_set as (
-  insert into public.vocabulary_sets (owner_id, title, description, difficulty, is_public, cover_color)
-  select null, 'IELTS Family', 'Từ vựng về gia đình - IELTS Speaking Part 1 & 2, Band 4.0-6.0.', 'easy', true, 'pink'
+  insert into public.vocabulary_sets (owner_id, title, description, difficulty, is_public, cover_color, category, topic)
+  select null, 'IELTS Family', 'Từ vựng về gia đình - IELTS Speaking Part 1 & 2, Band 4.0-6.0.', 'easy', true, 'pink', 'IELTS Band 4.0-6.0', 'Family & Relationships'
   where not exists (select 1 from public.vocabulary_sets where title = 'IELTS Family')
   returning id
 )
@@ -68,8 +68,8 @@ select id, v.word, v.meaning, v.pos, v.pron, v.example, v.example_vi from new_se
 
 -- 3. IELTS Hobbies
 with new_set as (
-  insert into public.vocabulary_sets (owner_id, title, description, difficulty, is_public, cover_color)
-  select null, 'IELTS Hobbies', 'Từ vựng về sở thích - IELTS Speaking Part 1, Band 4.0-6.0.', 'easy', true, 'orange'
+  insert into public.vocabulary_sets (owner_id, title, description, difficulty, is_public, cover_color, category, topic)
+  select null, 'IELTS Hobbies', 'Từ vựng về sở thích - IELTS Speaking Part 1, Band 4.0-6.0.', 'easy', true, 'orange', 'IELTS Band 4.0-6.0', 'Hobbies'
   where not exists (select 1 from public.vocabulary_sets where title = 'IELTS Hobbies')
   returning id
 )
@@ -99,8 +99,8 @@ select id, v.word, v.meaning, v.pos, v.pron, v.example, v.example_vi from new_se
 
 -- 4. IELTS Shopping
 with new_set as (
-  insert into public.vocabulary_sets (owner_id, title, description, difficulty, is_public, cover_color)
-  select null, 'IELTS Shopping', 'Từ vựng về mua sắm - IELTS Speaking Part 1 & 3, Band 4.0-6.0.', 'easy', true, 'purple'
+  insert into public.vocabulary_sets (owner_id, title, description, difficulty, is_public, cover_color, category, topic)
+  select null, 'IELTS Shopping', 'Từ vựng về mua sắm - IELTS Speaking Part 1 & 3, Band 4.0-6.0.', 'easy', true, 'purple', 'IELTS Band 4.0-6.0', 'Shopping & Fashion'
   where not exists (select 1 from public.vocabulary_sets where title = 'IELTS Shopping')
   returning id
 )
@@ -130,8 +130,8 @@ select id, v.word, v.meaning, v.pos, v.pron, v.example, v.example_vi from new_se
 
 -- 5. IELTS Transport
 with new_set as (
-  insert into public.vocabulary_sets (owner_id, title, description, difficulty, is_public, cover_color)
-  select null, 'IELTS Transport', 'Từ vựng về giao thông vận tải - IELTS Speaking & Writing, Band 4.0-6.0.', 'medium', true, 'red'
+  insert into public.vocabulary_sets (owner_id, title, description, difficulty, is_public, cover_color, category, topic)
+  select null, 'IELTS Transport', 'Từ vựng về giao thông vận tải - IELTS Speaking & Writing, Band 4.0-6.0.', 'medium', true, 'red', 'IELTS Band 4.0-6.0', 'Transportation'
   where not exists (select 1 from public.vocabulary_sets where title = 'IELTS Transport')
   returning id
 )
@@ -161,8 +161,8 @@ select id, v.word, v.meaning, v.pos, v.pron, v.example, v.example_vi from new_se
 
 -- 6. IELTS Home & Accommodation
 with new_set as (
-  insert into public.vocabulary_sets (owner_id, title, description, difficulty, is_public, cover_color)
-  select null, 'IELTS Home & Accommodation', 'Từ vựng về nhà ở - IELTS Speaking Part 1, Band 4.0-6.0.', 'easy', true, 'brown'
+  insert into public.vocabulary_sets (owner_id, title, description, difficulty, is_public, cover_color, category, topic)
+  select null, 'IELTS Home & Accommodation', 'Từ vựng về nhà ở - IELTS Speaking Part 1, Band 4.0-6.0.', 'easy', true, 'brown', 'IELTS Band 4.0-6.0', 'Home & Accommodation'
   where not exists (select 1 from public.vocabulary_sets where title = 'IELTS Home & Accommodation')
   returning id
 )
@@ -192,8 +192,8 @@ select id, v.word, v.meaning, v.pos, v.pron, v.example, v.example_vi from new_se
 
 -- 7. IELTS Cities & Urban Life
 with new_set as (
-  insert into public.vocabulary_sets (owner_id, title, description, difficulty, is_public, cover_color)
-  select null, 'IELTS Cities & Urban Life', 'Từ vựng về thành phố - IELTS Writing Task 2, Band 4.0-6.0.', 'medium', true, 'gray'
+  insert into public.vocabulary_sets (owner_id, title, description, difficulty, is_public, cover_color, category, topic)
+  select null, 'IELTS Cities & Urban Life', 'Từ vựng về thành phố - IELTS Writing Task 2, Band 4.0-6.0.', 'medium', true, 'gray', 'IELTS Band 4.0-6.0', 'Cities & Urban Life'
   where not exists (select 1 from public.vocabulary_sets where title = 'IELTS Cities & Urban Life')
   returning id
 )
@@ -223,8 +223,8 @@ select id, v.word, v.meaning, v.pos, v.pron, v.example, v.example_vi from new_se
 
 -- 8. IELTS Internet & Social Media
 with new_set as (
-  insert into public.vocabulary_sets (owner_id, title, description, difficulty, is_public, cover_color)
-  select null, 'IELTS Internet & Social Media', 'Từ vựng về Internet và mạng xã hội - IELTS Speaking & Writing, Band 4.0-6.0.', 'medium', true, 'cyan'
+  insert into public.vocabulary_sets (owner_id, title, description, difficulty, is_public, cover_color, category, topic)
+  select null, 'IELTS Internet & Social Media', 'Từ vựng về Internet và mạng xã hội - IELTS Speaking & Writing, Band 4.0-6.0.', 'medium', true, 'cyan', 'IELTS Band 4.0-6.0', 'Media & Communication'
   where not exists (select 1 from public.vocabulary_sets where title = 'IELTS Internet & Social Media')
   returning id
 )
@@ -254,8 +254,8 @@ select id, v.word, v.meaning, v.pos, v.pron, v.example, v.example_vi from new_se
 
 -- 9. IELTS Sports & Exercise
 with new_set as (
-  insert into public.vocabulary_sets (owner_id, title, description, difficulty, is_public, cover_color)
-  select null, 'IELTS Sports & Exercise', 'Từ vựng về thể thao - IELTS Speaking Part 1 & 3, Band 4.0-6.0.', 'easy', true, 'green'
+  insert into public.vocabulary_sets (owner_id, title, description, difficulty, is_public, cover_color, category, topic)
+  select null, 'IELTS Sports & Exercise', 'Từ vựng về thể thao - IELTS Speaking Part 1 & 3, Band 4.0-6.0.', 'easy', true, 'green', 'IELTS Band 4.0-6.0', 'Sports & Hobbies'
   where not exists (select 1 from public.vocabulary_sets where title = 'IELTS Sports & Exercise')
   returning id
 )
@@ -285,8 +285,8 @@ select id, v.word, v.meaning, v.pos, v.pron, v.example, v.example_vi from new_se
 
 -- 10. IELTS Books & Reading
 with new_set as (
-  insert into public.vocabulary_sets (owner_id, title, description, difficulty, is_public, cover_color)
-  select null, 'IELTS Books & Reading', 'Từ vựng về sách và đọc - IELTS Speaking Part 1, Band 4.0-6.0.', 'easy', true, 'brown'
+  insert into public.vocabulary_sets (owner_id, title, description, difficulty, is_public, cover_color, category, topic)
+  select null, 'IELTS Books & Reading', 'Từ vựng về sách và đọc - IELTS Speaking Part 1, Band 4.0-6.0.', 'easy', true, 'brown', 'IELTS Band 4.0-6.0', 'Books & Reading'
   where not exists (select 1 from public.vocabulary_sets where title = 'IELTS Books & Reading')
   returning id
 )

@@ -18,6 +18,8 @@ export interface VocabularySet {
   difficulty: Difficulty
   is_public: boolean
   cover_color: string | null
+  category: string | null // IELTS Band 4.0-6.0, English 12, etc.
+  topic: string | null // Work & Jobs, Education, Unit 1, etc.
   created_at: string
   updated_at: string
   // Trường tổng hợp (join/aggregate), không có trong bảng gốc
